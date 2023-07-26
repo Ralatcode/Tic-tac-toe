@@ -1,7 +1,7 @@
 const container = document.querySelector('.container');
 // gameboard modules
 const gameBoard = (()=>{
-    const boardContent = ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'];
+    const boardContent = [];
     const buildBoard = function() {
         const boardDiv = document.createElement('div');
         boardDiv.classList.add('boardDiv')
@@ -15,17 +15,34 @@ const gameBoard = (()=>{
 
     const renderBoard = () => {
         buildBoard();
-        let boxes = document.querySelectorAll('.box-div');
-        boxes = Array.from(boxes);
-
-        // for (i = 0; i < boxes.length; i++) {
-        //     boxes[i].textContent = boardContent[i]; 
-        // }
-
     }
     return {
-        renderBoard
+        renderBoard, boardContent
     };
 })();
 
 gameBoard.renderBoard();
+
+let boxes = document.querySelectorAll('.box-div');
+boxes = Array.from(boxes);
+
+boxes.forEach((box) => {
+    box.addEventListener('click', (e) => {
+        if (e.target.textContent === '') {
+            const inputArray = gameBoard.boardContent;
+            if (inputArray.length === 0) {
+                inputArray.push('X');
+                box.textContent = "X";
+            } else if (inputArray[inputArray.length - 1] == 'O') {
+                inputArray.push('X');
+                box.textContent = "X";
+            } else {
+                inputArray.push('O');
+                box.textContent = "O";
+            }
+        } else {
+            console.log('We are not empty');
+        }
+        
+    })
+});
