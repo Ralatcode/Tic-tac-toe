@@ -10,14 +10,15 @@ body {
 .boardDiv{
     display: grid;
     grid-template-columns: repeat(3, minmax(50px, 200px));
-    gap: 2px;
+    gap: 3px;
+    background-color: bisque;
     max-width: 400px;
     margin: 3rem auto 0;
     aspect-ratio: 1;
 }
 
 .box-div {
-    background-color: aqua;
+    background-color: #14bdac;
     display: flex;
     justify-content: center;
     align-items: center;
