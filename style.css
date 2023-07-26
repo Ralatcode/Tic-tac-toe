@@ -1,0 +1,27 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.boardDiv{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(50px, 200px));
+    gap: 2px;
+    max-width: 400px;
+    aspect-ratio: 1;
+}
+
+.box-div {
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 426px) {
+    .boardDiv {
+        max-width: 90%;
+        margin: 1.5rem auto 0;
+    }
+}
