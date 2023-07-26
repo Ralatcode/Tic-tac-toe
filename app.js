@@ -18,9 +18,9 @@ const gameBoard = (()=>{
         let boxes = document.querySelectorAll('.box-div');
         boxes = Array.from(boxes);
 
-        for (i = 0; i < boxes.length; i++) {
-            boxes[i].textContent = boardContent[i]; 
-        }
+        // for (i = 0; i < boxes.length; i++) {
+        //     boxes[i].textContent = boardContent[i]; 
+        // }
 
     }
     return {
