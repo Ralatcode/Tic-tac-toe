@@ -25,7 +25,14 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 2.5rem;
+}
+
+.box-div.p1 {
     color: rgb(84, 84, 84);
+}
+
+.box-div.p2 {
+    color: white;
 }
 
 @media (max-width: 426px) {
