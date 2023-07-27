@@ -33,12 +33,15 @@ boxes.forEach((box) => {
             if (inputArray.length === 0) {
                 inputArray.push('X');
                 box.textContent = "X";
+                box.classList.add('p1');
             } else if (inputArray[inputArray.length - 1] == 'O') {
                 inputArray.push('X');
                 box.textContent = "X";
+                box.classList.add('p1');
             } else {
                 inputArray.push('O');
                 box.textContent = "O";
+                box.classList.add('p2');
             }
         } else {
             console.log('We are not empty');
