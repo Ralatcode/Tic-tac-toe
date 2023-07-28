@@ -49,3 +49,11 @@ boxes.forEach((box) => {
         
     })
 });
+
+
+// winning logic
+const Board = [
+    ['X', 'O', 'X'],
+    ['O', 'X', 'O'],
+    ['X', 'O', 'X']
+];
