@@ -10,7 +10,7 @@ body {
     font-family: 'Josefin Sans', sans-serif;
 }
 
-.boardDiv{
+.container{
     display: grid;
     grid-template-columns: repeat(3, minmax(75px, 100px));
     grid-template-rows: repeat(3, minmax(75px, 100px));
@@ -22,7 +22,7 @@ body {
     border-radius: 10px;
 }
 
-.box-div {
+.cell {
     background-color: #14bdac;
     display: flex;
     justify-content: center;
@@ -30,6 +30,8 @@ body {
     font-size: 2.5rem;
     border-radius: 5px;
     cursor: pointer;
+    border: none;
+    outline: 0;
 }
 
 .box-div.p1 {
@@ -41,7 +43,7 @@ body {
 }
 
 @media (max-width: 426px) {
-    .boardDiv {
+    .container {
         max-width: 90%;
         margin: 1.5rem auto 0;
     }
