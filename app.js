@@ -23,7 +23,6 @@ const gameBoard = () => {
 
     const printBoard = () => {
         const boardWithValue = board.map((row) => row.map((cell) => cell.getValue()))
-        console.log(boardWithValue)
     }
 
     return {getBoard, markPlayerInput, printBoard};
@@ -74,16 +73,78 @@ const GameController = () => {
         board1.printBoard();
     }
 
-    const playRound = (row, col) => {
-        board1.markPlayerInput(getActivePlayer(), row, col);
+    const checkForWin = (board, player) => {
+        const playerMarker = player.token;
+        // for rows
+        for (let i = 0; i < 3; i++) {
+            if (
+                board[i][0].getValue() === playerMarker &&
+                board[i][1].getValue() === playerMarker &&
+                board[i][2].getValue() === playerMarker
+                ) {
+                console.log(`${player.getPlayerName()} Won!!`);
+                return;
+            }
+        }
 
+        // for columns
+        for (let i = 0; i < 3; i++) {
+            if (
+                board[0][i].getValue() === playerMarker &&
+                board[1][i].getValue() === playerMarker &&
+                board[2][i].getValue() === playerMarker
+                ) {
+                console.log(`${player.getPlayerName()} Won!!`);
+                return;
+            }
+        }
+
+        // for diagonals
+        for(let i = 0; i < 3; i++) {
+            if (
+                board[0][0].getValue() === playerMarker &&
+                board[1][1].getValue() === playerMarker &&
+                board[2][2].getValue() === playerMarker
+                ) {
+                console.log(`${player.getPlayerName()} Won!!`);
+                return;
+            }
+        }
+        // diagnonal 2
+        for(let i = 0; i < 3; i++) {
+            if (
+                board[0][2].getValue() === playerMarker &&
+                board[1][1].getValue() === playerMarker &&
+                board[2][0].getValue() === playerMarker
+                ) {
+                console.log(`${player.getPlayerName()} Won!!`);
+                return;
+            }
+        }
+    }
+
+    const playRound = (row, col) => {
+        const currentPlayer = getActivePlayer();
+        board1.markPlayerInput(currentPlayer, row, col);
+
+        // const chBoard = board1.getBoard();
+        // const currentPlayer = getActivePlayer();
+        // console.log(currentPlayer.token);
+        checkForWin(board1.getBoard(), currentPlayer);
+        
         // Win logic
         switchPlayerTurn();
         printNewRound();
     }
     printNewRound();
 
-    return {playRound, getActivePlayer, getBoard: board1.getBoard};
+    return {
+        playerOne,
+        playerTwo,
+        playRound,
+        getActivePlayer,
+        getBoard: board1.getBoard
+    };
 }
 
 const ScreenController = (() => {
@@ -103,6 +164,12 @@ const ScreenController = (() => {
                 cellButton.dataset.column = colIndex;
                 cellButton.textContent = cell.getValue() === 0 ? "" : cell.getValue();
                 container.appendChild(cellButton);
+                // add class for each player
+                if (cellButton.textContent == game.playerOne.token) {
+                    cellButton.classList.add('p1');
+                } if (cellButton.textContent == game.playerTwo.token) {
+                    cellButton.classList.add('p2');
+                }
             })
         })
     }
