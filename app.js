@@ -126,13 +126,9 @@ const GameController = () => {
     const playRound = (row, col) => {
         const currentPlayer = getActivePlayer();
         board1.markPlayerInput(currentPlayer, row, col);
-
-        // const chBoard = board1.getBoard();
-        // const currentPlayer = getActivePlayer();
-        // console.log(currentPlayer.token);
+        // win logic
         checkForWin(board1.getBoard(), currentPlayer);
         
-        // Win logic
         switchPlayerTurn();
         printNewRound();
     }
