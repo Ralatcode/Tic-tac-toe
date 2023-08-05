@@ -34,11 +34,11 @@ body {
     outline: 0;
 }
 
-.box-div.p1 {
+.cell.p1 {
     color: rgb(84, 84, 84);
 }
 
-.box-div.p2 {
+.cell.p2 {
     color: white;
 }
 
