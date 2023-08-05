@@ -1,4 +1,4 @@
-const container = document.querySelector('.container');
+
 // // gameboard modules
 // const gameBoard = (()=>{
 //     const boardContent = [];
@@ -65,6 +65,8 @@ const gameBoard = () => {
         }
     }
 
+    const getBoard = () => board;
+
     const markPlayerInput = (player, row, col) => {
         const playerSpot = board[row][col];
         // checks if cell is empty
@@ -80,7 +82,7 @@ const gameBoard = () => {
         console.log(boardWithValue)
     }
 
-    return {markPlayerInput, printBoard};
+    return {getBoard, markPlayerInput, printBoard};
 }
 
 
@@ -137,8 +139,30 @@ const GameController = () => {
     }
     printNewRound();
 
-    return {playRound, getActivePlayer};
+    return {playRound, getActivePlayer, getBoard: board1.getBoard};
 }
 
+const ScreenController = (() => {
+    const game = GameController();
+    const container = document.querySelector('.container');
+    console.log('called..')
+    const updateScreen = () => {
+        container.textContent = '';
 
+        const board = game.getBoard();
+        const activePlayer = game.getActivePlayer();
 
+        board.forEach((row, rowIndex) => {
+            row.forEach((cell, colIndex) => {
+                const cellButton = document.createElement('button');
+                cellButton.classList.add('cell');
+                cellButton.dataset.row = rowIndex;
+                cellButton.dataset.column = colIndex;
+                cellButton.textContent = cell.getValue();
+                container.appendChild(cellButton);
+            })
+        })
+    }
+
+    updateScreen();
+})();
