@@ -70,11 +70,8 @@ const gameBoard = () => {
     const markPlayerInput = (player, row, col) => {
         const playerSpot = board[row][col];
         // checks if cell is empty
-        if (playerSpot.getValue() == 0) {  // convert to ternary operator
-            playerSpot.addPlayerMark(player.token);
-        } else {
-            console.log('this cell is not empty');
-        }
+        playerSpot.getValue() === 0 ? playerSpot.addPlayerMark(player.token): console.log('this cell is not empty');
+
     }
 
     const printBoard = () => {
@@ -131,7 +128,7 @@ const GameController = () => {
     }
 
     const playRound = (row, col) => {
-        board1.addPlayerMark(getActivePlayer(), row, col);
+        board1.markPlayerInput(getActivePlayer(), row, col);
 
         // Win logic
         switchPlayerTurn();
@@ -162,6 +159,18 @@ const ScreenController = (() => {
             })
         })
     }
+
+    container.addEventListener('click', (e) => {
+        const clickedCellRow = e.target.dataset.row;
+        const clickedCellCol = e.target.dataset.column;
+        if (!clickedCellCol && !clickedCellRow) {
+            console.log('invalid click');
+        } else {
+            game.playRound(clickedCellRow, clickedCellCol);
+            updateScreen();
+        }
+    })
+
 
     updateScreen();
 })();
