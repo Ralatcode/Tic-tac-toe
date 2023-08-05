@@ -145,7 +145,6 @@ const GameController = () => {
 const ScreenController = (() => {
     const game = GameController();
     const container = document.querySelector('.container');
-    console.log('called..')
     const updateScreen = () => {
         container.textContent = '';
 
@@ -158,7 +157,7 @@ const ScreenController = (() => {
                 cellButton.classList.add('cell');
                 cellButton.dataset.row = rowIndex;
                 cellButton.dataset.column = colIndex;
-                cellButton.textContent = cell.getValue();
+                cellButton.textContent = cell.getValue() === 0 ? "" : cell.getValue();
                 container.appendChild(cellButton);
             })
         })
