@@ -83,7 +83,7 @@ const GameController = () => {
                 board[i][2].getValue() === playerMarker
                 ) {
                 console.log(`${player.getPlayerName()} Won!!`);
-                return;
+                return true;
             }
         }
 
@@ -95,7 +95,7 @@ const GameController = () => {
                 board[2][i].getValue() === playerMarker
                 ) {
                 console.log(`${player.getPlayerName()} Won!!`);
-                return;
+                return true;
             }
         }
 
@@ -107,7 +107,7 @@ const GameController = () => {
                 board[2][2].getValue() === playerMarker
                 ) {
                 console.log(`${player.getPlayerName()} Won!!`);
-                return;
+                return true;
             }
         }
         // diagnonal 2
@@ -118,17 +118,20 @@ const GameController = () => {
                 board[2][0].getValue() === playerMarker
                 ) {
                 console.log(`${player.getPlayerName()} Won!!`);
-                return;
+                return true;
             }
         }
+
+        return false;
     }
 
     const playRound = (row, col) => {
         const currentPlayer = getActivePlayer();
         board1.markPlayerInput(currentPlayer, row, col);
         // win logic
-        checkForWin(board1.getBoard(), currentPlayer);
-        
+        const roundResult = checkForWin(board1.getBoard(), currentPlayer);
+        console.log(roundResult);
+
         switchPlayerTurn();
         printNewRound();
     }
