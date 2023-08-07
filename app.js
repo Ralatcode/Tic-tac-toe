@@ -98,6 +98,11 @@ const GameController = () => {
     let winResult = false;
     let drawResult = false;
 
+    const getWinStatus = () => winResult;
+
+    const getDrawStatus = () => drawResult;
+
+
     const restartRound = () => {
         board1.resetBoard();
     }
@@ -190,7 +195,9 @@ const GameController = () => {
         playerTwo,
         playRound,
         getActivePlayer,
-        getBoard: board1.getBoard
+        getBoard: board1.getBoard,
+        getWinStatus,
+        getDrawStatus
     };
 }
 
