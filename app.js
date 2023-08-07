@@ -180,7 +180,7 @@ const GameController = () => {
         // win logic
         winResult = checkForWin(board1.getBoard(), currentPlayer);
         // only check for draw if there is no winner
-        if (winResult === false) {
+        if (!winResult) {
             drawResult = checkForDraw();
         }
         // restarts round on win or draw
@@ -231,6 +231,19 @@ const ScreenController = (() => {
         })
     }
 
+    const displayResult = () => {
+        const win = game.getWinStatus();
+        const draw = game.getDrawStatus();
+
+        const resultHeading = document.createElement('h3');
+        if (win) {
+            resultHeading.textContent = 'We have a winner!!';
+            container.appendChild(resultHeading);
+        } else if (draw) {
+            resultHeading.textContent = "It's a tie..."
+            container.appendChild(resultHeading);
+        }
+    }
     container.addEventListener('click', (e) => {
         const clickedCellRow = e.target.dataset.row;
         const clickedCellCol = e.target.dataset.column;
@@ -240,6 +253,7 @@ const ScreenController = (() => {
         } else {
             game.playRound(clickedCellRow, clickedCellCol);
             updateScreen();
+            displayResult();
         }
     })
 
