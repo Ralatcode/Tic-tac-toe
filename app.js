@@ -179,8 +179,11 @@ const GameController = () => {
         board1.markPlayerInput(currentPlayer, row, col);
         // win logic
         winResult = checkForWin(board1.getBoard(), currentPlayer);
-        drawResult = checkForDraw();
-
+        // only check for draw if there is no winner
+        if (winResult === false) {
+            drawResult = checkForDraw();
+        }
+        // restarts round on win or draw
         if (winResult || drawResult) {
             restartRound();
         }
