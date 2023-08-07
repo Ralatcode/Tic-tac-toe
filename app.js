@@ -95,8 +95,11 @@ const GameController = () => {
         board1.printBoard();
     }
 
-    const restartRound = () => {
+    let winResult = false;
+    let drawResult = false;
 
+    const restartRound = () => {
+        board1.resetBoard();
     }
 
     const checkForWin = (board, player) => {
@@ -151,12 +154,31 @@ const GameController = () => {
         return false;
     }
 
+    const checkForDraw = () => {
+        const newBoard = board1.getBoard();
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (newBoard[i][j].getValue() === 0) {
+                    // if any cell is empty
+                    return false;
+                }
+            }
+        }
+        // all cell filled, and no empty.
+        console.log('draw....');
+        return true;
+    }
+
     const playRound = (row, col) => {
         const currentPlayer = getActivePlayer();
         board1.markPlayerInput(currentPlayer, row, col);
         // win logic
-        const roundResult = checkForWin(board1.getBoard(), currentPlayer);
-        console.log(roundResult);
+        winResult = checkForWin(board1.getBoard(), currentPlayer);
+        drawResult = checkForDraw();
+
+        if (winResult || drawResult) {
+            restartRound();
+        }
 
         switchPlayerTurn();
         printNewRound();
@@ -175,9 +197,9 @@ const GameController = () => {
 const ScreenController = (() => {
     const game = GameController();
     const container = document.querySelector('.container');
+
     const updateScreen = () => {
         container.textContent = '';
-
         const board = game.getBoard();
         const activePlayer = game.getActivePlayer();
 
@@ -202,6 +224,7 @@ const ScreenController = (() => {
     container.addEventListener('click', (e) => {
         const clickedCellRow = e.target.dataset.row;
         const clickedCellCol = e.target.dataset.column;
+        // checks if click is valid
         if (!clickedCellCol && !clickedCellRow) {
             console.log('invalid click');
         } else {
