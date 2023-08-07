@@ -21,11 +21,25 @@ const gameBoard = () => {
 
     }
 
+    const resetBoard = () => {
+        for (let i = 0; i < row; i++) {
+            for (let j = 0; j < column; j++) {
+                //  reset all player mark to zero
+                board[i][j].addPlayerMark(0);
+            }
+        }
+    }
+
     const printBoard = () => {
         const boardWithValue = board.map((row) => row.map((cell) => cell.getValue()))
     }
 
-    return {getBoard, markPlayerInput, printBoard};
+    return {
+        getBoard,
+        markPlayerInput,
+        resetBoard,
+        printBoard
+    };
 }
 
 
@@ -39,7 +53,10 @@ function Cell() {
 
     const getValue = () => value;
 
-    return {addPlayerMark, getValue};
+    return {
+        addPlayerMark,
+        getValue
+    };
 }
 
 // player factory function
@@ -49,7 +66,12 @@ const Players = (player, token) => {
     
     const getPlayerName = () => playerName;
 
-    return {player, token, getPlayerName, updatePlayerName};
+    return {
+        player,
+        token,
+        getPlayerName,
+        updatePlayerName
+    };
 }
 
 
@@ -71,6 +93,10 @@ const GameController = () => {
 
     const printNewRound = () => {
         board1.printBoard();
+    }
+
+    const restartRound = () => {
+
     }
 
     const checkForWin = (board, player) => {
