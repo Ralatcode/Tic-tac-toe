@@ -265,6 +265,12 @@ const ScreenController = (() => {
         }
     }
 
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('open');
+        }
+    })
+
 
     updateScreen();
 })();
