@@ -98,6 +98,10 @@ const GameController = () => {
     let winResult = false;
     let drawResult = false;
 
+    let roundWinner = null;
+
+    const getRoundWinner = () => roundWinner;
+
     const getWinStatus = () => winResult;
 
     const getDrawStatus = () => drawResult;
@@ -116,7 +120,7 @@ const GameController = () => {
                 board[i][1].getValue() === playerMarker &&
                 board[i][2].getValue() === playerMarker
                 ) {
-                console.log(`${player.getPlayerName()} Won!!`);
+                roundWinner = player.getPlayerName();
                 return true;
             }
         }
@@ -128,7 +132,7 @@ const GameController = () => {
                 board[1][i].getValue() === playerMarker &&
                 board[2][i].getValue() === playerMarker
                 ) {
-                console.log(`${player.getPlayerName()} Won!!`);
+                roundWinner = player.getPlayerName();
                 return true;
             }
         }
@@ -140,7 +144,7 @@ const GameController = () => {
                 board[1][1].getValue() === playerMarker &&
                 board[2][2].getValue() === playerMarker
                 ) {
-                console.log(`${player.getPlayerName()} Won!!`);
+                roundWinner = player.getPlayerName();
                 return true;
             }
         }
@@ -151,7 +155,7 @@ const GameController = () => {
                 board[1][1].getValue() === playerMarker &&
                 board[2][0].getValue() === playerMarker
                 ) {
-                console.log(`${player.getPlayerName()} Won!!`);
+                roundWinner = player.getPlayerName();
                 return true;
             }
         }
@@ -170,7 +174,6 @@ const GameController = () => {
             }
         }
         // all cell filled, and no empty.
-        console.log('draw....');
         return true;
     }
 
@@ -200,16 +203,20 @@ const GameController = () => {
         getActivePlayer,
         getBoard: board1.getBoard,
         getWinStatus,
-        getDrawStatus
+        getDrawStatus,
+        getRoundWinner
     };
 }
 
 const ScreenController = (() => {
     const game = GameController();
     const container = document.querySelector('.container');
+    const modal = document.querySelector('.modal-box');
+    const resultDisplay = document.querySelector('.modal-text');
 
     const updateScreen = () => {
         container.textContent = '';
+        resultDisplay.textContent = '';
         const board = game.getBoard();
         const activePlayer = game.getActivePlayer();
 
@@ -231,19 +238,6 @@ const ScreenController = (() => {
         })
     }
 
-    const displayResult = () => {
-        const win = game.getWinStatus();
-        const draw = game.getDrawStatus();
-
-        const resultHeading = document.createElement('h3');
-        if (win) {
-            resultHeading.textContent = 'We have a winner!!';
-            container.appendChild(resultHeading);
-        } else if (draw) {
-            resultHeading.textContent = "It's a tie..."
-            container.appendChild(resultHeading);
-        }
-    }
     container.addEventListener('click', (e) => {
         const clickedCellRow = e.target.dataset.row;
         const clickedCellCol = e.target.dataset.column;
@@ -256,6 +250,20 @@ const ScreenController = (() => {
             displayResult();
         }
     })
+
+    const displayResult = () => {
+        const win = game.getWinStatus();
+        const draw = game.getDrawStatus();
+        const winnerName = game.getRoundWinner();
+        if (win) {
+            resultDisplay.textContent = `${winnerName} Won !!`;
+            modal.classList.add('open');
+
+        } else if (draw) {
+            resultDisplay.textContent = "It's a tie..."
+            modal.classList.add('open');
+        }
+    }
 
 
     updateScreen();
