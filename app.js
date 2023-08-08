@@ -261,10 +261,3 @@ const ScreenController = (() => {
     updateScreen();
 })();
 
-const btn = document.querySelector('.modal-test');
-
-const modal = document.querySelector('.modal-box');
-
-btn.addEventListener('click', () => {
-    modal.classList.toggle('open');
-})
