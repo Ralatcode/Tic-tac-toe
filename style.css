@@ -16,7 +16,7 @@ body {
     grid-template-rows: repeat(3, minmax(90px, 120px));
     gap: 3px;
     background-color: bisque;
-    margin: 3rem auto 0;
+    margin: 5rem auto 0;
     max-width: max-content;
     padding: .5rem;
     border-radius: 10px;
@@ -45,15 +45,22 @@ body {
 .modal-box {
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: left 1s, opacity .5s;
+}
+
+.modal-box.open {
+    left: 0;
+    opacity: 1;
 }
 
 .modal-box > .text-box {
     padding: 3rem;
-    margin: 30% auto 0;
+    margin: 15% auto 0;
     background-color: #eee;
     width: 60%;
     border-radius: 20px;
@@ -68,6 +75,11 @@ body {
     .container {
         max-width: 90%;
         margin: 1.5rem auto 0;
+    }
+
+    .modal-box > .text-box {
+        padding: 1.75rem;
+        margin: 50% auto 0;
     }
 
     .modal-text {
