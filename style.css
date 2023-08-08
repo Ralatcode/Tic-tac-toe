@@ -71,6 +71,11 @@ body {
     font-size: 2rem;
 }
 
+.modal-test {
+    position: relative;
+    z-index: 99;
+}
+
 @media (max-width: 426px) {
     .container {
         max-width: 90%;
