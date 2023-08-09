@@ -17,7 +17,13 @@ const gameBoard = () => {
     const markPlayerInput = (player, row, col) => {
         const playerSpot = board[row][col];
         // checks if cell is empty
-        playerSpot.getValue() === 0 ? playerSpot.addPlayerMark(player.token): console.log('this cell is not empty');
+        if (playerSpot.getValue() === 0) {
+            playerSpot.addPlayerMark(player.token);
+            return true;
+        } else {
+            console.log('this cell is not empty');
+            return false;
+        }
 
     }
 
@@ -179,13 +185,15 @@ const GameController = () => {
 
     const playRound = (row, col) => {
         const currentPlayer = getActivePlayer();
-        board1.markPlayerInput(currentPlayer, row, col);
-        // win logic
-        winResult = checkForWin(board1.getBoard(), currentPlayer);
-        // only check for draw if there is no winner
-        if (!winResult) {
+        const boardInput = board1.markPlayerInput(currentPlayer, row, col);
+
+        if (boardInput) {
+            // win logic
+            winResult = checkForWin(board1.getBoard(), currentPlayer);
+            // only check for draw if there is no winner
+            if (!winResult) {
             drawResult = checkForDraw();
-        }
+            }
         // restarts round on win or draw
         if (winResult || drawResult) {
             restartRound();
@@ -193,6 +201,8 @@ const GameController = () => {
 
         switchPlayerTurn();
         printNewRound();
+        }
+        
     }
     printNewRound();
 
