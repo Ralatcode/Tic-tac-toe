@@ -104,6 +104,8 @@ const GameController = () => {
     let winResult = false;
     let drawResult = false;
 
+    let winPattern = [];
+
     let roundWinner = null;
 
     const getRoundWinner = () => roundWinner;
@@ -111,10 +113,12 @@ const GameController = () => {
     const getWinStatus = () => winResult;
 
     const getDrawStatus = () => drawResult;
+    const getWinPattern = () => winPattern;
 
 
     const restartRound = () => {
         board1.resetBoard();
+        winPattern = [];
     }
 
     const checkForWin = (board, player) => {
@@ -127,6 +131,10 @@ const GameController = () => {
                 board[i][2].getValue() === playerMarker
                 ) {
                 roundWinner = player.getPlayerName();
+                winPattern.push([i,0]);
+                winPattern.push([i,1]);
+                winPattern.push([i,2]);
+                console.log(winPattern);
                 return true;
             }
         }
@@ -138,6 +146,10 @@ const GameController = () => {
                 board[1][i].getValue() === playerMarker &&
                 board[2][i].getValue() === playerMarker
                 ) {
+                winPattern.push([0,i]);
+                winPattern.push([1,i]);
+                winPattern.push([2,i]);
+                console.log(winPattern);
                 roundWinner = player.getPlayerName();
                 return true;
             }
@@ -150,6 +162,10 @@ const GameController = () => {
                 board[1][1].getValue() === playerMarker &&
                 board[2][2].getValue() === playerMarker
                 ) {
+                winPattern.push([0,0]);
+                winPattern.push([1,1]);
+                winPattern.push([2,2]);
+                console.log(winPattern);
                 roundWinner = player.getPlayerName();
                 return true;
             }
@@ -161,6 +177,10 @@ const GameController = () => {
                 board[1][1].getValue() === playerMarker &&
                 board[2][0].getValue() === playerMarker
                 ) {
+                winPattern.push([0,2]);
+                winPattern.push([1,1]);
+                winPattern.push([2,0]);
+                console.log(winPattern);
                 roundWinner = player.getPlayerName();
                 return true;
             }
@@ -197,11 +217,11 @@ const GameController = () => {
         // restarts round on win or draw
         if (winResult || drawResult) {
             restartRound();
+        } else {
+            switchPlayerTurn();
+            printNewRound();
         }
-
-        switchPlayerTurn();
-        printNewRound();
-        }
+    }
         
     }
     printNewRound();
@@ -214,6 +234,7 @@ const GameController = () => {
         getBoard: board1.getBoard,
         getWinStatus,
         getDrawStatus,
+        getWinPattern,
         getRoundWinner
     };
 }
