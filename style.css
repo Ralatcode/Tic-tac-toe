@@ -90,7 +90,7 @@ body {
     width: 70%;
     max-width: 90%;
     margin: 2rem auto;
-    transition: flex-direction 1s ease-in-out;
+    transition: flex-direction .5s ease-in-out;
 }
 
 .intro-content > .inner-div.switch {
@@ -106,6 +106,7 @@ body {
 
 .intro-content > .inner-div > .p1-div {
     background-color: grey;
+    color: #eee;
 }
 
 .intro-content > .inner-div h4 {
