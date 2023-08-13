@@ -43,6 +43,80 @@ body {
     color: white;
 }
 
+.intro-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+}
+
+.intro-content {
+    text-align: center;
+    background-color: #eee;
+    width: 70%;
+    max-width: 800px;
+    margin: 4rem auto 0;
+    padding: 2.5rem;
+    border-radius: .5rem;
+}
+
+.intro-content > h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.intro-content button {
+    font-family: inherit;
+    font-size: .85rem;
+    outline: none;
+    cursor: pointer;
+    padding: .7rem .5rem;
+    background-color: bisque;
+    border: 2px solid seagreen;
+    border-radius: 5px;
+}
+
+.intro-content button:hover {
+    background-color: antiquewhite;
+}
+
+.intro-content > .inner-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 70%;
+    max-width: 90%;
+    margin: 2rem auto;
+    transition: flex-direction .5s ease-out;
+}
+
+.intro-content > .inner-div.switch {
+    flex-direction: column-reverse;
+}
+
+
+.intro-content > .inner-div > div {
+    padding: 2.5rem;
+    border: 2px solid seagreen;
+    border-radius: .5rem;
+}
+
+.intro-content > .inner-div h4 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.intro-content > .inner-div span {
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
 .modal-box {
     position: absolute;
     top: 0;
