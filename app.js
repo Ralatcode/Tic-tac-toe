@@ -244,6 +244,8 @@ const ScreenController = (() => {
     const container = document.querySelector('.container');
     const modal = document.querySelector('.modal-box');
     const resultDisplay = document.querySelector('.modal-text');
+    const introModal = document.querySelector('.intro-box');
+    const switchPlayerBtn = document.querySelector('.switch-turn');
 
     const updateScreen = () => {
         container.textContent = '';
@@ -268,6 +270,11 @@ const ScreenController = (() => {
             })
         })
     }
+
+    switchPlayerBtn.addEventListener('click', () => {
+        const innerBox = document.querySelector('.intro-content > .inner-div');
+        innerBox.classList.toggle('switch');
+    })
 
     container.addEventListener('click', (e) => {
         const clickedCellRow = e.target.dataset.row;

@@ -86,15 +86,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: column;
+    flex-direction: row;
     width: 70%;
     max-width: 90%;
     margin: 2rem auto;
-    transition: flex-direction .5s ease-out;
+    transition: flex-direction 1s ease-in-out;
 }
 
 .intro-content > .inner-div.switch {
-    flex-direction: column-reverse;
+    flex-direction: row-reverse;
 }
 
 
@@ -102,6 +102,10 @@ body {
     padding: 2.5rem;
     border: 2px solid seagreen;
     border-radius: .5rem;
+}
+
+.intro-content > .inner-div > .p1-div {
+    background-color: grey;
 }
 
 .intro-content > .inner-div h4 {
