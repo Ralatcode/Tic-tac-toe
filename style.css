@@ -164,6 +164,7 @@ body {
 }
 
 .update-name-modal {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -171,6 +172,13 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 99;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+}
+
+.update-name-modal.show {
+    display: block;
+    opacity: 1;
 }
 
 .update-name-modal > form {
