@@ -246,13 +246,17 @@ const ScreenController = (() => {
     const resultDisplay = document.querySelector('.modal-text');
     const introModal = document.querySelector('.intro-box');
     const switchPlayerBtn = document.querySelector('.switch-turn');
+    const changePlayerNameBtn = document.querySelector('.change-name');
+    const updateNameModal = document.querySelector('.update-name-modal');
+    const screenPlayerName = document.querySelector('#name-input');
+    const nameForm = document.querySelector('.update-name-modal > form');
+
 
     const updateScreen = () => {
         container.textContent = '';
         resultDisplay.textContent = '';
         const board = game.getBoard();
         const activePlayer = game.getActivePlayer();
-
         board.forEach((row, rowIndex) => {
             row.forEach((cell, colIndex) => {
                 const cellButton = document.createElement('button');
@@ -274,6 +278,15 @@ const ScreenController = (() => {
     switchPlayerBtn.addEventListener('click', () => {
         const innerBox = document.querySelector('.intro-content > .inner-div');
         innerBox.classList.toggle('switch');
+    })
+
+    nameForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const player = game.playerOne;
+        player.updatePlayerName(screenPlayerName.value);
+        const introName = document.querySelector('#p1-name');
+        introName.textContent = player.getPlayerName();
+        updateNameModal.classList.remove('show');
     })
 
     container.addEventListener('click', (e) => {
@@ -302,6 +315,11 @@ const ScreenController = (() => {
             modal.classList.add('open');
         }
     }
+
+    changePlayerNameBtn.addEventListener('click', () => {
+        screenPlayerName.value = game.playerOne.getPlayerName();
+        updateNameModal.classList.add('show');
+    })
 
     window.addEventListener('click', (e) => {
         if (e.target === modal) {

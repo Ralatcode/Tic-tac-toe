@@ -170,20 +170,19 @@ body {
 }
 
 .update-name-modal {
-    display: none;
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 99;
     opacity: 0;
-    transition: opacity .5s ease-in-out;
+    transition: opacity 1s ease-in-out, left 1s ease-in-out;
 }
 
 .update-name-modal.show {
-    display: block;
+    left: 0;
     opacity: 1;
 }
 
