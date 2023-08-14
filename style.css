@@ -122,6 +122,17 @@ body {
     margin-bottom: 1rem;
 }
 
+.change-name {
+    display: block;
+    width: max-content;
+    margin: 1.5rem auto 0;
+    color: seagreen;
+}
+
+.change-name:hover {
+    color: grey;
+}
+
 .modal-box {
     position: absolute;
     top: 0;
