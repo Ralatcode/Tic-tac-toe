@@ -68,9 +68,9 @@ body {
     margin-bottom: 1rem;
 }
 
-.intro-content button {
+.intro-content button, .save-btn {
     font-family: inherit;
-    font-size: .85rem;
+    font-size: .9rem;
     outline: none;
     cursor: pointer;
     padding: .75rem;
@@ -193,6 +193,15 @@ body {
     border-color: green;
     outline: none;
     box-shadow: 0 0 0 0.1rem seagreen;
+}
+
+.save-btn {
+    display: block;
+    font-size: 1rem;
+    padding: .5rem .75rem;
+    width: 30%;
+    margin: .5rem 0;
+    border-width: 1px;
 }
 
 
