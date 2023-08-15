@@ -250,6 +250,7 @@ const ScreenController = (() => {
     const updateNameModal = document.querySelector('.update-name-modal');
     const screenPlayerName = document.querySelector('#name-input');
     const nameForm = document.querySelector('.update-name-modal > form');
+    const startBtn = document.querySelector('.start');
 
 
     const updateScreen = () => {
@@ -278,6 +279,12 @@ const ScreenController = (() => {
     switchPlayerBtn.addEventListener('click', () => {
         const innerBox = document.querySelector('.intro-content > .inner-div');
         innerBox.classList.toggle('switch');
+    })
+
+    startBtn.addEventListener('click', () => {
+        introModal.classList.add('hide');
+        container.classList.add('show');
+        updateScreen();
     })
 
     nameForm.addEventListener('submit', (e) => {
@@ -327,7 +334,5 @@ const ScreenController = (() => {
         }
     })
 
-
-    updateScreen();
 })();
 
