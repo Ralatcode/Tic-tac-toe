@@ -287,6 +287,8 @@ const ScreenController = (() => {
         updateScreen();
     })
 
+    introModal.addEventListener('transitionend', () => introModal.classList.add('display-none'));
+
     nameForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const player = game.playerOne;

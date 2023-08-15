@@ -10,6 +10,7 @@ body {
     font-family: 'Josefin Sans', sans-serif;
 }
 
+
 .container{
     display: none;
     /* display: grid; */
@@ -233,6 +234,10 @@ body {
     width: 30%;
     margin: .5rem 0;
     border-width: 1px;
+}
+
+.display-none {
+    display: none;
 }
 
 
