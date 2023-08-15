@@ -97,6 +97,14 @@ const GameController = () => {
 
     const getActivePlayer = () => activePlayer;
 
+    let firstPlayer = players[0];
+
+    const updateFirstPlayer = (newFirstPlayer) => {
+        firstPlayer = newFirstPlayer;
+    };
+
+    const getFirstPlayer = () => firstPlayer;
+
     const printNewRound = () => {
         board1.printBoard();
     }
@@ -115,10 +123,10 @@ const GameController = () => {
     const getDrawStatus = () => drawResult;
     const getWinPattern = () => winPattern;
 
-
     const restartRound = () => {
         board1.resetBoard();
         winPattern = [];
+        activePlayer = getFirstPlayer();
     }
 
     const checkForWin = (board, player) => {
@@ -212,7 +220,7 @@ const GameController = () => {
             winResult = checkForWin(board1.getBoard(), currentPlayer);
             // only check for draw if there is no winner
             if (!winResult) {
-            drawResult = checkForDraw();
+                drawResult = checkForDraw();
             }
         // restarts round on win or draw
         if (winResult || drawResult) {
@@ -232,6 +240,7 @@ const GameController = () => {
         playRound,
         getActivePlayer,
         switchPlayerTurn,
+        updateFirstPlayer,
         getBoard: board1.getBoard,
         getWinStatus,
         getDrawStatus,
@@ -252,11 +261,6 @@ const ScreenController = (() => {
     const screenPlayerName = document.querySelector('#name-input');
     const nameForm = document.querySelector('.update-name-modal > form');
     const startBtn = document.querySelector('.start');
-
-    let firstPlayer = null;
-
-    const getFirstPlayer = () => firstPlayer;
-
 
     const updateScreen = () => {
         container.textContent = '';
@@ -291,7 +295,7 @@ const ScreenController = (() => {
     startBtn.addEventListener('click', () => {
         introModal.classList.add('hide');
         container.classList.add('show');
-        firstPlayer = game.getActivePlayer();
+        game.updateFirstPlayer(game.getActivePlayer());
         updateScreen();
     })
 
@@ -344,9 +348,6 @@ const ScreenController = (() => {
         }
     })
 
-    return {
-        getFirstPlayer
-    }
 
 })();
 
