@@ -231,6 +231,7 @@ const GameController = () => {
         playerTwo,
         playRound,
         getActivePlayer,
+        switchPlayerTurn,
         getBoard: board1.getBoard,
         getWinStatus,
         getDrawStatus,
@@ -251,6 +252,10 @@ const ScreenController = (() => {
     const screenPlayerName = document.querySelector('#name-input');
     const nameForm = document.querySelector('.update-name-modal > form');
     const startBtn = document.querySelector('.start');
+
+    let firstPlayer = null;
+
+    const getFirstPlayer = () => firstPlayer;
 
 
     const updateScreen = () => {
@@ -276,14 +281,17 @@ const ScreenController = (() => {
         })
     }
 
+    // switch player turn
     switchPlayerBtn.addEventListener('click', () => {
         const innerBox = document.querySelector('.intro-content > .inner-div');
         innerBox.classList.toggle('switch');
+        game.switchPlayerTurn();
     })
 
     startBtn.addEventListener('click', () => {
         introModal.classList.add('hide');
         container.classList.add('show');
+        firstPlayer = game.getActivePlayer();
         updateScreen();
     })
 
@@ -335,6 +343,10 @@ const ScreenController = (() => {
             modal.classList.remove('open');
         }
     })
+
+    return {
+        getFirstPlayer
+    }
 
 })();
 
