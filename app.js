@@ -251,6 +251,7 @@ const GameController = () => {
 
 const ScreenController = (() => {
     const game = GameController();
+    const interfaceDiv = document.querySelector('.interface-div');
     const container = document.querySelector('.container');
     const modal = document.querySelector('.modal-box');
     const resultDisplay = document.querySelector('.modal-text');
@@ -294,7 +295,7 @@ const ScreenController = (() => {
 
     startBtn.addEventListener('click', () => {
         introModal.classList.add('hide');
-        container.classList.add('show');
+        interfaceDiv.classList.add('show');
         game.updateFirstPlayer(game.getActivePlayer());
         updateScreen();
     })

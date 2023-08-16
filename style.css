@@ -9,6 +9,13 @@ body {
     background-color: #eee;
     font-family: 'Josefin Sans', sans-serif;
 }
+.interface-div {
+    display: none;
+}
+
+.interface-div.show {
+    display: block;
+}
 
 
 .score-box {
@@ -51,8 +58,7 @@ body {
 
 
 .container{
-    display: none;
-    /* display: grid; */
+    display: grid;
     grid-template-columns: repeat(3, minmax(90px, 120px));
     grid-template-rows: repeat(3, minmax(90px, 120px));
     gap: 3px;
@@ -61,10 +67,6 @@ body {
     max-width: max-content;
     padding: .5rem;
     border-radius: 10px;
-}
-
-.container.show {
-    display: grid;
 }
 
 .cell {
