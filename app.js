@@ -68,15 +68,25 @@ function Cell() {
 // player factory function
 const Players = (player, token) => {
     let playerName = player;
+    let playerScore = 0;
+
     const updatePlayerName = (playerInput) => playerName = playerInput;
     
     const getPlayerName = () => playerName;
+
+    const playerScoreIncrement = () => playerScore++;
+    const playerScoreReset = () => playerScore = 0;
+
+    const getPlayerScore = () => playerScore;
 
     return {
         player,
         token,
         getPlayerName,
-        updatePlayerName
+        updatePlayerName,
+        playerScoreIncrement,
+        playerScoreReset,
+        getPlayerScore
     };
 }
 
@@ -139,6 +149,7 @@ const GameController = () => {
                 board[i][2].getValue() === playerMarker
                 ) {
                 roundWinner = player.getPlayerName();
+                player.playerScoreIncrement();
                 winPattern.push([i,0]);
                 winPattern.push([i,1]);
                 winPattern.push([i,2]);
@@ -159,6 +170,7 @@ const GameController = () => {
                 winPattern.push([2,i]);
                 console.log(winPattern);
                 roundWinner = player.getPlayerName();
+                player.playerScoreIncrement();
                 return true;
             }
         }
@@ -175,6 +187,7 @@ const GameController = () => {
                 winPattern.push([2,2]);
                 console.log(winPattern);
                 roundWinner = player.getPlayerName();
+                player.playerScoreIncrement();
                 return true;
             }
         }
@@ -190,6 +203,7 @@ const GameController = () => {
                 winPattern.push([2,0]);
                 console.log(winPattern);
                 roundWinner = player.getPlayerName();
+                player.playerScoreIncrement();
                 return true;
             }
         }
@@ -269,7 +283,11 @@ const ScreenController = (() => {
         const board = game.getBoard();
         const activePlayer = game.getActivePlayer();
         const scoreBoardName = document.querySelector('.p1-dn');
+        const pOneScore = document.querySelector('.p1-score');
+        const pTwoScore = document.querySelector('.p2-score');
         scoreBoardName.textContent = game.playerOne.getPlayerName();
+        pOneScore.textContent = game.playerOne.getPlayerScore();
+        pTwoScore.textContent = game.playerTwo.getPlayerScore();
         board.forEach((row, rowIndex) => {
             row.forEach((cell, colIndex) => {
                 const cellButton = document.createElement('button');
