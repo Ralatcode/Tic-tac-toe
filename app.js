@@ -372,6 +372,20 @@ const ScreenController = (() => {
         }
     }
 
+    modal.addEventListener('transitionend', () => {
+        const playerOne = game.playerOne;
+        const playerTwo = game.playerTwo;
+        if (playerOne.getPlayerScore() === 3 || playerTwo.getPlayerScore() === 3) {
+
+            // checks player with highest score after one player has 2 wins
+            if (playerOne.getPlayerScore() > playerTwo.getPlayerScore()) {
+                console.log(`${playerOne.getPlayerName()} won the game`);
+            } else {
+                console.log(`${playerTwo.getPlayerName()} won the game`);
+            }
+        }
+    })
+
     changePlayerNameBtn.addEventListener('click', () => {
         screenPlayerName.value = game.playerOne.getPlayerName();
         updateNameModal.classList.add('show');
