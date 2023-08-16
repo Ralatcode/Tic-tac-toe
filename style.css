@@ -28,6 +28,7 @@ body {
     padding: 1rem 2rem;
     border-radius: .5rem;
     color: rgb(84, 84, 84);
+    transition: border-bottom 300ms ease-in;
 }
 
 .player > h3 {
@@ -42,6 +43,10 @@ body {
     line-height: 1;
     font-weight: 600;
     color: white;
+}
+
+.player.active {
+    border-bottom: 5px solid chartreuse;
 }
 
 
