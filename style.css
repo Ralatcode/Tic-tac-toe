@@ -11,6 +11,40 @@ body {
 }
 
 
+.score-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    margin: 3rem auto 0;
+    padding: 1rem;
+    border-radius: .5rem;
+    background-color: bisque;
+}
+
+.player {
+    text-align: center;
+    background-color: #14bdac;
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    color: rgb(84, 84, 84);
+}
+
+.player > h3 {
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.player > h4 {
+    font-size: 1.75rem;
+    line-height: 1;
+    font-weight: 600;
+    color: white;
+}
+
+
 .container{
     display: none;
     /* display: grid; */
