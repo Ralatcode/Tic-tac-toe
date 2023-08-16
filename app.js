@@ -288,6 +288,19 @@ const ScreenController = (() => {
         scoreBoardName.textContent = game.playerOne.getPlayerName();
         pOneScore.textContent = game.playerOne.getPlayerScore();
         pTwoScore.textContent = game.playerTwo.getPlayerScore();
+
+
+        const playerOneDiv = document.querySelector('.p1-scorebox');
+        const playerTwoDiv = document.querySelector('.p2-scorebox');
+
+        if (activePlayer.token === 'X') {
+            playerTwoDiv.classList.remove('active');
+            playerOneDiv.classList.add('active');
+        } else if (activePlayer.token === 'O') {
+            playerOneDiv.classList.remove('active');
+            playerTwoDiv.classList.add('active');
+        }
+
         board.forEach((row, rowIndex) => {
             row.forEach((cell, colIndex) => {
                 const cellButton = document.createElement('button');
