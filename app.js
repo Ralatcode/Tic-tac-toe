@@ -268,6 +268,8 @@ const ScreenController = (() => {
         resultDisplay.textContent = '';
         const board = game.getBoard();
         const activePlayer = game.getActivePlayer();
+        const scoreBoardName = document.querySelector('.p1-dn');
+        scoreBoardName.textContent = game.playerOne.getPlayerName();
         board.forEach((row, rowIndex) => {
             row.forEach((cell, colIndex) => {
                 const cellButton = document.createElement('button');
@@ -293,6 +295,7 @@ const ScreenController = (() => {
         game.switchPlayerTurn();
     })
 
+    // start game
     startBtn.addEventListener('click', () => {
         introModal.classList.add('hide');
         interfaceDiv.classList.add('show');
