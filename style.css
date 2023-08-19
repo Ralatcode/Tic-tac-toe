@@ -289,12 +289,18 @@ body {
 .game-winner-box {
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
     height: 100%;
+    opacity: 0;
+    transition: left 1s, opacity .5s;
 }
 
+.game-winner-box.open {
+    left: 0;
+    opacity: 1;
+}
 .game-winner-box > .content {
     text-align: center;
     background-color: #eee;
@@ -305,8 +311,12 @@ body {
     margin: var(--modal-top-margin) auto 0;
 }
 
+.winner-h3 {
+    font-size: 1.5rem;
+}
+
 .restart-game {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 
