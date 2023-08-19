@@ -124,7 +124,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.intro-content button, .save-btn {
+.intro-content button, .save-btn, .restart-game {
     font-family: inherit;
     font-size: .9rem;
     outline: none;
@@ -304,6 +304,11 @@ body {
     max-width: 400px;
     margin: var(--modal-top-margin) auto 0;
 }
+
+.restart-game {
+    margin-top: 1rem;
+}
+
 
 @media (max-width: 426px) {
     .container {
