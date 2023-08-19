@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+:root {
+    --modal-top-margin: 20%;
+}
+
 body {
     background-color: #eee;
     font-family: 'Josefin Sans', sans-serif;
@@ -281,6 +285,25 @@ body {
     display: none;
 }
 
+
+.game-winner-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+}
+
+.game-winner-box > .content {
+    text-align: center;
+    background-color: #eee;
+    padding: 2rem;
+    border-radius: .5rem;
+    width: 70%;
+    max-width: 400px;
+    margin: var(--modal-top-margin) auto 0;
+}
 
 @media (max-width: 426px) {
     .container {
