@@ -298,7 +298,7 @@ body {
 .game-winner-box > .content {
     text-align: center;
     background-color: #eee;
-    padding: 2rem;
+    padding: 3rem 2rem;
     border-radius: .5rem;
     width: 70%;
     max-width: 400px;
