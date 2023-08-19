@@ -355,6 +355,7 @@ const ScreenController = (() => {
             game.playRound(clickedCellRow, clickedCellCol);
             updateScreen();
             displayResult();
+            checkGameWinner();
         }
     })
 
@@ -372,7 +373,7 @@ const ScreenController = (() => {
         }
     }
 
-    modal.addEventListener('transitionend', () => {
+    const checkGameWinner = () => {
         const playerOne = game.playerOne;
         const playerTwo = game.playerTwo;
         if (playerOne.getPlayerScore() === 3 || playerTwo.getPlayerScore() === 3) {
@@ -384,7 +385,7 @@ const ScreenController = (() => {
                 console.log(`${playerTwo.getPlayerName()} won the game`);
             }
         }
-    })
+    }
 
     changePlayerNameBtn.addEventListener('click', () => {
         screenPlayerName.value = game.playerOne.getPlayerName();
