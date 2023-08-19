@@ -377,7 +377,7 @@ const ScreenController = (() => {
         const playerTwo = game.playerTwo;
         if (playerOne.getPlayerScore() === 3 || playerTwo.getPlayerScore() === 3) {
 
-            // checks player with highest score after one player has 2 wins
+            // checks player with highest score after one player has 3 wins
             if (playerOne.getPlayerScore() > playerTwo.getPlayerScore()) {
                 console.log(`${playerOne.getPlayerName()} won the game`);
             } else {
