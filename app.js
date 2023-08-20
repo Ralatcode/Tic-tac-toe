@@ -265,7 +265,8 @@ const GameController = () => {
         getWinStatus,
         getDrawStatus,
         getWinPattern,
-        getRoundWinner
+        getRoundWinner,
+        restartGame
     };
 }
 
@@ -383,6 +384,7 @@ const ScreenController = (() => {
         const playerTwo = game.playerTwo;
         const winnerModal = document.querySelector('.game-winner-box');
         const winnerModalH3 = document.querySelector('.winner-h3');
+        const restartBtn = document.querySelector('.restart-game');
         if (playerOne.getPlayerScore() === 3 || playerTwo.getPlayerScore() === 3) {
             winnerModal.classList.add('open');
             // checks player with highest score after one player has 3 wins
@@ -392,6 +394,13 @@ const ScreenController = (() => {
                 winnerModalH3.textContent = `${playerTwo.getPlayerName()} has won the game.`;
             }
         }
+
+        restartBtn.addEventListener('click', () => {
+            game.restartGame();
+            interfaceDiv.classList.remove('show');
+            winnerModal.classList.remove('open');
+            introModal.classList.remove('hide', 'display-none');
+        })
     }
 
     const removeModal = (e) => {
