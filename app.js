@@ -376,13 +376,15 @@ const ScreenController = (() => {
     const checkGameWinner = () => {
         const playerOne = game.playerOne;
         const playerTwo = game.playerTwo;
+        const winnerModal = document.querySelector('.game-winner-box');
+        const winnerModalH3 = document.querySelector('.winner-h3');
         if (playerOne.getPlayerScore() === 3 || playerTwo.getPlayerScore() === 3) {
-
+            winnerModal.classList.add('open');
             // checks player with highest score after one player has 3 wins
             if (playerOne.getPlayerScore() > playerTwo.getPlayerScore()) {
-                console.log(`${playerOne.getPlayerName()} won the game`);
+                winnerModalH3.textContent = `${playerOne.getPlayerName()} has won the game.`;
             } else {
-                console.log(`${playerTwo.getPlayerName()} won the game`);
+                winnerModalH3.textContent = `${playerTwo.getPlayerName()} has won the game.`;
             }
         }
     }
