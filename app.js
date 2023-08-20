@@ -138,6 +138,13 @@ const GameController = () => {
         activePlayer = getFirstPlayer();
     }
 
+    const restartGame = () => {
+        winResult = false;
+        drawResult = false;
+        playerOne.playerScoreReset();
+        playerTwo.playerScoreReset();
+    }
+
     const checkForWin = (board, player) => {
         const playerMarker = player.token;
         // for rows
