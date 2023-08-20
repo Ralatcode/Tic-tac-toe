@@ -24,7 +24,6 @@ const gameBoard = () => {
             console.log('this cell is not empty');
             return false;
         }
-
     }
 
     const resetBoard = () => {
@@ -355,7 +354,6 @@ const ScreenController = (() => {
             game.playRound(clickedCellRow, clickedCellCol);
             updateScreen();
             displayResult();
-            checkGameWinner();
         }
     })
 
@@ -389,16 +387,19 @@ const ScreenController = (() => {
         }
     }
 
+    const removeModal = (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('open');
+            checkGameWinner();
+        } 
+    }
+
     changePlayerNameBtn.addEventListener('click', () => {
         screenPlayerName.value = game.playerOne.getPlayerName();
         updateNameModal.classList.add('show');
     })
 
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('open');
-        }
-    })
+    window.addEventListener('click', removeModal);
 
 
 })();
