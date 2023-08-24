@@ -68,7 +68,7 @@ body {
     grid-template-rows: repeat(3, minmax(90px, 120px));
     gap: 3px;
     background-color: bisque;
-    margin: 5rem auto 0;
+    margin: 2rem auto 0;
     max-width: max-content;
     padding: .5rem;
     border-radius: 10px;
