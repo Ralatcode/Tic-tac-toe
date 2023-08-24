@@ -326,6 +326,11 @@ const ScreenController = (() => {
         })
     }
 
+    const removeModal = () => {
+        modal.classList.remove('open');
+        checkGameWinner();
+    }
+
     // switch player turn
     switchPlayerBtn.addEventListener('click', () => {
         const innerBox = document.querySelector('.intro-content > .inner-div');
@@ -379,6 +384,9 @@ const ScreenController = (() => {
         }
     }
 
+    const continueBtn = document.querySelector('.continue-game');
+    continueBtn.addEventListener('click', removeModal);
+
     const checkGameWinner = () => {
         const playerOne = game.playerOne;
         const playerTwo = game.playerTwo;
@@ -403,19 +411,16 @@ const ScreenController = (() => {
         })
     }
 
-    const removeModal = (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('open');
-            checkGameWinner();
-        } 
-    }
-
     changePlayerNameBtn.addEventListener('click', () => {
         screenPlayerName.value = game.playerOne.getPlayerName();
         updateNameModal.classList.add('show');
     })
 
-    window.addEventListener('click', removeModal);
+    window.addEventListener('click', (e) => {
+        if (e.target == modal) {
+            removeModal();
+        }
+    });
 
 
 })();
