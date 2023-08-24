@@ -125,7 +125,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.intro-content button, .save-btn, .restart-game {
+.intro-content button, .save-btn, .restart-game, .continue-game {
     font-family: inherit;
     font-size: .9rem;
     outline: none;
@@ -218,6 +218,11 @@ body {
 .modal-text {
     text-align: center;
     font-size: 2rem;
+}
+
+.continue-game {
+    display: block;
+    margin: 1.5rem auto 0;
 }
 
 .update-name-modal {
