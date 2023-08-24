@@ -382,10 +382,12 @@ const ScreenController = (() => {
             resultDisplay.textContent = "It's a tie..."
             modal.classList.add('open');
         }
+
+        const continueBtn = document.querySelector('.continue-game');
+        continueBtn.addEventListener('click', removeModal);
     }
 
-    const continueBtn = document.querySelector('.continue-game');
-    continueBtn.addEventListener('click', removeModal);
+    
 
     const checkGameWinner = () => {
         const playerOne = game.playerOne;
