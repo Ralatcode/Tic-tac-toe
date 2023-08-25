@@ -284,6 +284,8 @@ const ScreenController = (() => {
     const nameForm = document.querySelector('.update-name-modal > form');
     const startBtn = document.querySelector('.start');
     let playerTypes = document.querySelectorAll('.player-type');
+    let btns = document.querySelectorAll('.player-type > button');
+    btns = Array.from(btns);
 
     playerTypes = Array.from(playerTypes);
 
@@ -422,13 +424,10 @@ const ScreenController = (() => {
     })
 
     playerTypes.forEach(playerType => {
-        let btns = document.querySelectorAll('.player-type > button');
-        btns = Array.from(btns);
-
         playerType.addEventListener('click', (e) => {
             btns.forEach(btn => {
                 btn.classList.remove('active');
-                if (e.target.innerHTMl === btn.innerHTML) {
+                if (e.target === btn.innerHTML) {
                     btn.classList.add('active');
                 }
             })
