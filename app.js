@@ -427,7 +427,7 @@ const ScreenController = (() => {
         playerType.addEventListener('click', (e) => {
             btns.forEach(btn => {
                 btn.classList.remove('active');
-                if (e.target === btn.innerHTML) {
+                if (e.target === btn) {
                     btn.classList.add('active');
                 }
             })
