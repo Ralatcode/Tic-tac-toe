@@ -422,7 +422,17 @@ const ScreenController = (() => {
     })
 
     playerTypes.forEach(playerType => {
-        playerType.addEventListener('click', (e) => console.log(e.target));
+        let btns = document.querySelectorAll('.player-type > button');
+        btns = Array.from(btns);
+
+        playerType.addEventListener('click', (e) => {
+            btns.forEach(btn => {
+                btn.classList.remove('active');
+                if (e.target.innerHTMl === btn.innerHTML) {
+                    btn.classList.add('active');
+                }
+            })
+        });
     })
 
 
