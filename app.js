@@ -283,6 +283,9 @@ const ScreenController = (() => {
     const screenPlayerName = document.querySelector('#name-input');
     const nameForm = document.querySelector('.update-name-modal > form');
     const startBtn = document.querySelector('.start');
+    let playerTypes = document.querySelectorAll('.player-type');
+
+    playerTypes = Array.from(playerTypes);
 
     const updateScreen = () => {
         container.textContent = '';
@@ -417,6 +420,11 @@ const ScreenController = (() => {
         screenPlayerName.value = game.playerOne.getPlayerName();
         updateNameModal.classList.add('show');
     })
+
+    playerTypes.forEach(playerType => {
+        playerType.addEventListener('click', (e) => console.log(e.target));
+    })
+
 
     window.addEventListener('click', (e) => {
         if (e.target == modal) {
