@@ -180,6 +180,15 @@ body {
     margin-bottom: 1rem;
 }
 
+.player-type > .active {
+    background-color: #14bdac;
+    color: white;
+}
+
+.player-type > .active:hover {
+    background-color: #14bdac;
+}
+
 .change-name {
     display: block;
     width: max-content;
