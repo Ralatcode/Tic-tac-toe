@@ -284,8 +284,10 @@ const ScreenController = (() => {
     const nameForm = document.querySelector('.update-name-modal > form');
     const startBtn = document.querySelector('.start');
     let playerTypes = document.querySelectorAll('.player-type');
-    let btns = document.querySelectorAll('.player-type > button');
-    btns = Array.from(btns);
+    let playerOnebtns = document.querySelectorAll('.player-type > .player-One');
+    let playerTwobtns = document.querySelectorAll('.player-type > .player-Two');
+    playerOnebtns = Array.from(playerOnebtns);
+    playerTwobtns = Array.from(playerTwobtns);
 
     playerTypes = Array.from(playerTypes);
 
@@ -423,14 +425,26 @@ const ScreenController = (() => {
         updateNameModal.classList.add('show');
     })
 
+
+    // toggle playertype for p1 and p2 active playertype
     playerTypes.forEach(playerType => {
         playerType.addEventListener('click', (e) => {
-            btns.forEach(btn => {
-                btn.classList.remove('active');
-                if (e.target === btn) {
-                    btn.classList.add('active');
-                }
-            })
+            const parentNode = e.target.parentNode;
+            if (parentNode.classList.contains('p1')) {
+                playerOnebtns.forEach(p1Btn => {
+                    p1Btn.classList.remove('active');
+                    if (e.target === p1Btn) {
+                        p1Btn.classList.add('active');
+                    }
+                })
+            } else if (parentNode.classList.contains('p2')) {
+                playerTwobtns.forEach(p2Btn => {
+                    p2Btn.classList.remove('active');
+                    if (e.target === p2Btn) {
+                        p2Btn.classList.add('active');
+                    }
+                })
+            }
         });
     })
 
