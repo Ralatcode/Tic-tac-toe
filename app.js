@@ -84,7 +84,6 @@ const Players = (player, token) => {
     
     const getPlayerType = () => playerType;
 
-
     return {
         player,
         token,
@@ -238,6 +237,22 @@ const GameController = () => {
         }
         // all cell filled, and no empty.
         return true;
+    }
+
+    const getEmptyCell = () => {
+        const newBoard = board1.getBoard();
+        const cellsArray = [];
+
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                // empty cells
+                if (newBoard[i][j].getValue() === 0) {
+                    const index = [i, j];
+                    cellsArray.push(index);
+                } 
+            }
+        }
+        return cellsArray;
     }
 
     const playRound = (row, col) => {
