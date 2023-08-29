@@ -312,10 +312,6 @@ const ScreenController = (() => {
         pOneScore.textContent = game.playerOne.getPlayerScore();
         pTwoScore.textContent = game.playerTwo.getPlayerScore();
 
-        // test
-        console.log(`Player one is ${game.playerOne.getPlayerType()}`);
-        console.log(`Player two is ${game.playerTwo.getPlayerType()}`);
-
 
         const playerOneDiv = document.querySelector('.p1-scorebox');
         const playerTwoDiv = document.querySelector('.p2-scorebox');
