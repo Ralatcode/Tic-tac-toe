@@ -77,6 +77,13 @@ const Players = (player, token) => {
     const playerScoreReset = () => playerScore = 0;
 
     const getPlayerScore = () => playerScore;
+    
+    let playerType = null;
+
+    const updatePlayerType = (string) => playerType = string;
+    
+    const getPlayerType = () => playerType;
+
 
     return {
         player,
@@ -85,7 +92,9 @@ const Players = (player, token) => {
         updatePlayerName,
         playerScoreIncrement,
         playerScoreReset,
-        getPlayerScore
+        getPlayerScore,
+        updatePlayerType,
+        getPlayerType
     };
 }
 
