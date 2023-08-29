@@ -312,6 +312,10 @@ const ScreenController = (() => {
         pOneScore.textContent = game.playerOne.getPlayerScore();
         pTwoScore.textContent = game.playerTwo.getPlayerScore();
 
+        // test
+        console.log(`Player one is ${game.playerOne.getPlayerType()}`);
+        console.log(`Player two is ${game.playerTwo.getPlayerType()}`);
+
 
         const playerOneDiv = document.querySelector('.p1-scorebox');
         const playerTwoDiv = document.querySelector('.p2-scorebox');
@@ -347,6 +351,33 @@ const ScreenController = (() => {
         checkGameWinner();
     }
 
+    const checkDOMPlayerType = () => {
+        // looks for the active class on playerOne btns and assigns player type
+        playerOnebtns.forEach(p1Btn => {
+            if (p1Btn.classList.contains('active')) {
+                if (p1Btn.classList.contains('player-selected')) {
+                    game.playerOne.updatePlayerType('Human');
+                } else if (p1Btn.classList.contains('ai-selected')) {
+                    game.playerOne.updatePlayerType('AI');
+                }
+            } else {
+                return false;
+            }
+        })
+
+        playerTwobtns.forEach(p2Btn => {
+            if (p2Btn.classList.contains('active')) {
+                if (p2Btn.classList.contains('player-selected')) {
+                    game.playerTwo.updatePlayerType('Human');
+                } else if (p2Btn.classList.contains('ai-selected')) {
+                    game.playerTwo.updatePlayerType('AI');
+                }
+            } else {
+                return false;
+            }
+        })
+    }
+
     // switch player turn
     switchPlayerBtn.addEventListener('click', () => {
         const innerBox = document.querySelector('.intro-content > .inner-div');
@@ -359,6 +390,7 @@ const ScreenController = (() => {
         introModal.classList.add('hide');
         interfaceDiv.classList.add('show');
         game.updateFirstPlayer(game.getActivePlayer());
+        checkDOMPlayerType();
         updateScreen();
     })
 
