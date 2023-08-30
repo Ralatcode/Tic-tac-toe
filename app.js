@@ -255,6 +255,18 @@ const GameController = () => {
         return cellsArray;
     }
 
+    const AIPlayer = () => {
+        console.log('player is ai..')
+        const availableCells = getEmptyCell();
+            if (availableCells === []) {
+                console.log('no space');
+                return false;
+            } else if (availableCells.length >= 1) {
+                const firstItem = availableCells[0];
+                playRound(firstItem[0], firstItem[1]);
+            }
+    }
+
     const playRound = (row, col) => {
         const currentPlayer = getActivePlayer();
         const boardInput = board1.markPlayerInput(currentPlayer, row, col);
@@ -290,6 +302,7 @@ const GameController = () => {
         getDrawStatus,
         getWinPattern,
         getRoundWinner,
+        AIPlayer,
         restartGame
     };
 }
@@ -355,7 +368,15 @@ const ScreenController = (() => {
                 }
             })
         })
+
+        if(activePlayer.getPlayerType() === 'AI') {
+            game.AIPlayer();
+            updateScreen();
+            displayResult();
+            return false;
+        }
     }
+
 
     const removeModal = () => {
         modal.classList.remove('open');
