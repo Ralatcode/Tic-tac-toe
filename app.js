@@ -256,8 +256,10 @@ const GameController = () => {
     }
 
     const AIPlayer = () => {
-        console.log('player is ai..')
-        const availableCells = getEmptyCell();
+        const currentPlayer = getActivePlayer();
+        if (currentPlayer.getPlayerType() === 'AI') {
+            console.log('player is ai..');
+            const availableCells = getEmptyCell();
             if (availableCells === []) {
                 console.log('no space');
                 return false;
@@ -265,6 +267,7 @@ const GameController = () => {
                 const firstItem = availableCells[0];
                 playRound(firstItem[0], firstItem[1]);
             }
+        }
     }
 
     const playRound = (row, col) => {
@@ -284,6 +287,7 @@ const GameController = () => {
         } else {
             switchPlayerTurn();
             printNewRound();
+            AIPlayer();
         }
     }
         
@@ -332,6 +336,7 @@ const ScreenController = (() => {
         container.textContent = '';
         resultDisplay.textContent = '';
         const board = game.getBoard();
+        game.AIPlayer();
         const activePlayer = game.getActivePlayer();
         const scoreBoardName = document.querySelector('.p1-dn');
         const pOneScore = document.querySelector('.p1-score');
@@ -368,14 +373,8 @@ const ScreenController = (() => {
                 }
             })
         })
-
-        if(activePlayer.getPlayerType() === 'AI') {
-            game.AIPlayer();
-            updateScreen();
-            return false;
-        }
+        displayResult();
     }
-
 
     const removeModal = () => {
         modal.classList.remove('open');
@@ -445,11 +444,11 @@ const ScreenController = (() => {
         } else {
             game.playRound(clickedCellRow, clickedCellCol);
             updateScreen();
-            displayResult();
         }
     })
 
     const displayResult = () => {
+        console.log('display-result ran');
         const win = game.getWinStatus();
         const draw = game.getDrawStatus();
         const winnerName = game.getRoundWinner();
