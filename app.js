@@ -372,7 +372,6 @@ const ScreenController = (() => {
         if(activePlayer.getPlayerType() === 'AI') {
             game.AIPlayer();
             updateScreen();
-            displayResult();
             return false;
         }
     }
