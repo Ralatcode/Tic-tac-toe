@@ -281,9 +281,10 @@ const GameController = () => {
             if (!winResult) {
                 drawResult = checkForDraw();
             }
-        // restarts round on win or draw
+        // display results and restarts round on win or draw
         if (winResult || drawResult) {
-            restartRound();
+            const display = displayController();
+            display.displayResult();
         } else {
             switchPlayerTurn();
             printNewRound();
@@ -311,19 +312,83 @@ const GameController = () => {
     };
 }
 
+const displayController = () => {
+    const game = GameController();
+    const modal = document.querySelector('.modal-box');
+    const introModal = document.querySelector('.intro-box');
+    const resultDisplay = document.querySelector('.modal-text');
+
+    const displayResult = () => {
+        console.log('display-result ran');
+        const win = game.getWinStatus();
+        const draw = game.getDrawStatus();
+        const winnerName = game.getRoundWinner();
+        if (win) {
+            resultDisplay.textContent = `${winnerName} Won !!`;
+            modal.classList.add('open');
+
+        } else if (draw) {
+            resultDisplay.textContent = "It's a tie..."
+            modal.classList.add('open');
+        }
+
+        const removeModal = () => {
+            modal.classList.remove('open');
+            checkGameWinner();
+        }
+        const continueBtn = document.querySelector('.continue-game');
+        continueBtn.addEventListener('click', removeModal);
+
+        window.addEventListener('click', (e) => {
+            if (e.target == modal) {
+                removeModal();
+            }
+        });
+
+    }
+
+    const checkGameWinner = () => {
+        const playerOne = game.playerOne;
+        const playerTwo = game.playerTwo;
+        const winnerModal = document.querySelector('.game-winner-box');
+        const winnerModalH3 = document.querySelector('.winner-h3');
+        const restartBtn = document.querySelector('.restart-game');
+        if (playerOne.getPlayerScore() === 3 || playerTwo.getPlayerScore() === 3) {
+            winnerModal.classList.add('open');
+            // checks player with highest score after one player has 3 wins
+            if (playerOne.getPlayerScore() > playerTwo.getPlayerScore()) {
+                winnerModalH3.textContent = `${playerOne.getPlayerName()} has won the game.`;
+            } else {
+                winnerModalH3.textContent = `${playerTwo.getPlayerName()} has won the game.`;
+            }
+        }
+
+        restartBtn.addEventListener('click', () => {
+            game.restartGame();
+            interfaceDiv.classList.remove('show');
+            winnerModal.classList.remove('open');
+            introModal.classList.remove('hide', 'display-none');
+        })
+    }
+
+    return {
+        displayResult
+    }
+    
+}
+
 const ScreenController = (() => {
     const game = GameController();
     const interfaceDiv = document.querySelector('.interface-div');
     const container = document.querySelector('.container');
-    const modal = document.querySelector('.modal-box');
-    const resultDisplay = document.querySelector('.modal-text');
-    const introModal = document.querySelector('.intro-box');
     const switchPlayerBtn = document.querySelector('.switch-turn');
     const changePlayerNameBtn = document.querySelector('.change-name');
     const updateNameModal = document.querySelector('.update-name-modal');
     const screenPlayerName = document.querySelector('#name-input');
     const nameForm = document.querySelector('.update-name-modal > form');
+    const resultDisplay = document.querySelector('.modal-text');
     const startBtn = document.querySelector('.start');
+    const introModal = document.querySelector('.intro-box');
     let playerTypes = document.querySelectorAll('.player-type');
     let playerOnebtns = document.querySelectorAll('.player-type > .player-One');
     let playerTwobtns = document.querySelectorAll('.player-type > .player-Two');
@@ -373,13 +438,8 @@ const ScreenController = (() => {
                 }
             })
         })
-        displayResult();
     }
 
-    const removeModal = () => {
-        modal.classList.remove('open');
-        checkGameWinner();
-    }
 
     const checkDOMPlayerType = () => {
         // looks for the active class on playerOne btns and assigns player type
@@ -465,31 +525,6 @@ const ScreenController = (() => {
         continueBtn.addEventListener('click', removeModal);
     }
 
-    
-
-    const checkGameWinner = () => {
-        const playerOne = game.playerOne;
-        const playerTwo = game.playerTwo;
-        const winnerModal = document.querySelector('.game-winner-box');
-        const winnerModalH3 = document.querySelector('.winner-h3');
-        const restartBtn = document.querySelector('.restart-game');
-        if (playerOne.getPlayerScore() === 3 || playerTwo.getPlayerScore() === 3) {
-            winnerModal.classList.add('open');
-            // checks player with highest score after one player has 3 wins
-            if (playerOne.getPlayerScore() > playerTwo.getPlayerScore()) {
-                winnerModalH3.textContent = `${playerOne.getPlayerName()} has won the game.`;
-            } else {
-                winnerModalH3.textContent = `${playerTwo.getPlayerName()} has won the game.`;
-            }
-        }
-
-        restartBtn.addEventListener('click', () => {
-            game.restartGame();
-            interfaceDiv.classList.remove('show');
-            winnerModal.classList.remove('open');
-            introModal.classList.remove('hide', 'display-none');
-        })
-    }
 
     changePlayerNameBtn.addEventListener('click', () => {
         screenPlayerName.value = game.playerOne.getPlayerName();
@@ -519,12 +554,6 @@ const ScreenController = (() => {
         });
     })
 
-
-    window.addEventListener('click', (e) => {
-        if (e.target == modal) {
-            removeModal();
-        }
-    });
 
 
 })();
