@@ -318,70 +318,6 @@ const GameController = () => {
     };
 }
 
-// const displayController = () => {
-
-//     const game = GameController();
-
-//     const displayResult = (win, draw, winnerName) => {
-//         const modal = document.querySelector('.modal-box');
-//         const resultDisplay = document.querySelector('.modal-text');
-//         console.log(`win is ${win} draw is ${draw}, winner result is ${winnerName}`)
-//         if (win) {
-//             console.log('display-result ran');
-//             resultDisplay.textContent = `${winnerName} Won !!`;
-//             modal.classList.add('open');
-
-//         } else if (draw) {
-//             resultDisplay.textContent = "It's a tie..."
-//             modal.classList.add('open');
-//         }
-
-//         const removeModal = () => {
-//             modal.classList.remove('open');
-//             checkGameWinner();
-//         }
-//         const continueBtn = document.querySelector('.continue-game');
-//         continueBtn.addEventListener('click', removeModal);
-
-//         window.addEventListener('click', (e) => {
-//             if (e.target == modal) {
-//                 removeModal();
-//             }
-//         });
-
-//     }
-
-//     const checkGameWinner = () => {
-//         const playerOne = game.playerOne;
-//         const playerTwo = game.playerTwo;
-//         const winnerModal = document.querySelector('.game-winner-box');
-//         const winnerModalH3 = document.querySelector('.winner-h3');
-//         const restartBtn = document.querySelector('.restart-game');
-//         console.log(`player one is ${playerOne.getPlayerScore()} and playertwo is ${playerTwo.getPlayerScore()}`)
-//         if (playerOne.getPlayerScore() === 3 || playerTwo.getPlayerScore() === 3) {
-//             winnerModal.classList.add('open');
-//             // checks player with highest score after one player has 3 wins
-//             if (playerOne.getPlayerScore() > playerTwo.getPlayerScore()) {
-//                 winnerModalH3.textContent = `${playerOne.getPlayerName()} has won the game.`;
-//             } else {
-//                 winnerModalH3.textContent = `${playerTwo.getPlayerName()} has won the game.`;
-//             }
-//         }
-
-//         restartBtn.addEventListener('click', () => {
-//             game.restartGame();
-//             interfaceDiv.classList.remove('show');
-//             winnerModal.classList.remove('open');
-//             introModal.classList.remove('hide', 'display-none');
-//         })
-//     }
-
-//     return {
-//         displayResult
-//     }
-    
-// }
-
 const ScreenController = (() => {
     const game = GameController();
     const interfaceDiv = document.querySelector('.interface-div');
@@ -576,24 +512,6 @@ const ScreenController = (() => {
             updateScreen();
         }
     })
-
-    // const displayResult = () => {
-    //     console.log('display-result ran');
-    //     const win = game.getWinStatus();
-    //     const draw = game.getDrawStatus();
-    //     const winnerName = game.getRoundWinner();
-    //     if (win) {
-    //         resultDisplay.textContent = `${winnerName} Won !!`;
-    //         modal.classList.add('open');
-
-    //     } else if (draw) {
-    //         resultDisplay.textContent = "It's a tie..."
-    //         modal.classList.add('open');
-    //     }
-
-    //     const continueBtn = document.querySelector('.continue-game');
-    //     continueBtn.addEventListener('click', removeModal);
-    // }
 
 
     changePlayerNameBtn.addEventListener('click', () => {
