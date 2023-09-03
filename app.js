@@ -142,6 +142,9 @@ const GameController = () => {
 
     const restartRound = () => {
         board1.resetBoard();
+        winResult = false;
+        drawResult = false;
+        roundWinner = null;
         winPattern = [];
         activePlayer = getFirstPlayer();
     }
