@@ -272,6 +272,9 @@ const GameController = () => {
                 console.log('someone-won. dont play');
                 return false;
             } else if (availableCells.length >= 1) {
+                // const board2 = board1.getBoard();
+                // const bestMove = minimax(board2, currentPlayer).index;
+                // console.log(bestMove);
                 const firstItem = availableCells[0];
                 playRound(firstItem[0], firstItem[1]);
                 return true;
