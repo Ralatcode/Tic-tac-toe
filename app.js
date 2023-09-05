@@ -280,14 +280,9 @@ const GameController = () => {
     }
 
     const minimax = (board, player) => {
-        let humanPlayer;
-        let aiPlayer;
+        const humanPlayer = playerOne;
+        const aiPlayer = playerTwo;
 
-        if (player.getPlayerType() === "Human") {
-            humanPlayer = player;
-        } else if (player.getPlayerType() === "AI") {
-            aiPlayer = player;
-        }
         const availableCells = getEmptyCell();
 
         if (checkForWin(board, humanPlayer)) {
@@ -306,8 +301,25 @@ const GameController = () => {
             const moveCol = move[1];
             const playerSpot = newBoard[moveRow][moveCol];
             playerSpot.addPlayerMark(player.token);
+
+            const result = minimax(newBoard, player === aiPlayer ? humanPlayer : aiPlayer);
+            moves.push({
+                index: move,
+                score: result.score
+            });
         }
         
+        return player === aiPlayer ? getBestMove(moves) : getWorstMove(moves);
+    }
+
+    // Helper function to get the best move
+    function getBestMove(moves) {
+        return moves.reduce((bestMove, move) => (move.score > bestMove.score ? move : bestMove), moves[0]);
+    }
+    
+    // Helper function to get the worst move
+    function getWorstMove(moves) {
+        return moves.reduce((worstMove, move) => (move.score < worstMove.score ? move : worstMove), moves[0]);
     }
 
     const playRound = (row, col) => {
