@@ -279,6 +279,37 @@ const GameController = () => {
         }
     }
 
+    const minimax = (board, player) => {
+        let humanPlayer;
+        let aiPlayer;
+
+        if (player.getPlayerType() === "Human") {
+            humanPlayer = player;
+        } else if (player.getPlayerType() === "AI") {
+            aiPlayer = player;
+        }
+        const availableCells = getEmptyCell();
+
+        if (checkForWin(board, humanPlayer)) {
+            return {score: -1};
+        } else if (checkForWin(board, aiPlayer)) {
+            return {score: 1};
+        } else if (availableCells.length === 0) {
+            return {score: 0};
+        }
+
+        const moves = [];
+
+        for (const move of availableCells) {
+            const newBoard = board;
+            const moveRow = move[0];
+            const moveCol = move[1];
+            const playerSpot = newBoard[moveRow][moveCol];
+            playerSpot.addPlayerMark(player.token);
+        }
+        
+    }
+
     const playRound = (row, col) => {
         const currentPlayer = getActivePlayer();
         const boardInput = board1.markPlayerInput(currentPlayer, row, col);
