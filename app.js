@@ -229,6 +229,61 @@ const GameController = () => {
         return false;
     }
 
+    const AIcheckWin = (board, player) => {
+        const playerMarker = player.token;
+        // for rows
+        for (let i = 0; i < 3; i++) {
+            if (
+                board[i][0].getValue() === playerMarker &&
+                board[i][1].getValue() === playerMarker &&
+                board[i][2].getValue() === playerMarker
+                ) {
+                roundWinner = player.getPlayerName();
+                player.playerScoreIncrement();
+                winPattern.push([i,0]);
+                winPattern.push([i,1]);
+                winPattern.push([i,2]);
+                console.log(winPattern);
+                return true;
+            }
+        }
+
+        // for columns
+        for (let i = 0; i < 3; i++) {
+            if (
+                board[0][i].getValue() === playerMarker &&
+                board[1][i].getValue() === playerMarker &&
+                board[2][i].getValue() === playerMarker
+                ) {
+                return true;
+            }
+        }
+
+        // for diagonals
+        for(let i = 0; i < 3; i++) {
+            if (
+                board[0][0].getValue() === playerMarker &&
+                board[1][1].getValue() === playerMarker &&
+                board[2][2].getValue() === playerMarker
+                ) {
+                return true;
+            }
+        }
+        // diagnonal 2
+        for(let i = 0; i < 3; i++) {
+            if (
+                board[0][2].getValue() === playerMarker &&
+                board[1][1].getValue() === playerMarker &&
+                board[2][0].getValue() === playerMarker
+                ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
     const checkForDraw = () => {
         const newBoard = board1.getBoard();
         for (let i = 0; i < 3; i++) {
@@ -274,7 +329,7 @@ const GameController = () => {
             } else if (availableCells.length >= 1) {
                 const board2 = board1.getBoard();
                 const bestMove = minimax(board2, currentPlayer).index;
-                console.log(bestMove);
+                // console.log(bestMove);
                 // const firstItem = availableCells[0];
                 // playRound(firstItem[0], firstItem[1]);
                 return true;
@@ -288,9 +343,9 @@ const GameController = () => {
 
         const availableCells = getEmptyCell();
 
-        if (checkForWin(board, humanPlayer)) {
+        if (AIcheckWin(board, humanPlayer)) {
             return {score: -1};
-        } else if (checkForWin(board, aiPlayer)) {
+        } else if (AIcheckWin(board, aiPlayer)) {
             return {score: 1};
         } else if (availableCells.length === 0) {
             return {score: 0};
@@ -299,13 +354,13 @@ const GameController = () => {
         const moves = [];
 
         for (const move of availableCells) {
-            // const newBoard = board1.getBoard();
+            const newBoard = [...board1.getBoard()];
             // const newBoard = JSON.parse(JSON.stringify(board));
             const moveRow = move[0];
             const moveCol = move[1];
             const playerSpot = newBoard[moveRow][moveCol];
-            console.log(newBoard);
-            // playerSpot.addPlayerMark(player.token);
+            console.log(playerSpot);
+            playerSpot.addPlayerMark(player.token);
             // playerSpot.getValue() = player.token;
 
             const result = minimax(newBoard, player === aiPlayer ? humanPlayer : aiPlayer);
