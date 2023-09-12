@@ -425,55 +425,6 @@ const GameController = () => {
         return move;
     }
 
-    // const minimax = (board, player) => {
-    //     const humanPlayer = playerOne;
-    //     const aiPlayer = playerTwo;
-
-    //     const availableCells = getEmptyCell();
-
-    //     if (AIcheckWin(board, humanPlayer)) {
-    //         return {score: -1};
-    //     } else if (AIcheckWin(board, aiPlayer)) {
-    //         return {score: 1};
-    //     } else if (availableCells.length === 0) {
-    //         return {score: 0};
-    //     }
-
-    //     const moves = [];
-
-    //     for (const move of availableCells) {
-    //         const AIBoard = [];
-    //         for (let i = 0; i < board.length; i++) {
-    //             AIBoard[i] = [];
-    //             for (let j = 0; j < board[i].length; j++) {
-    //                 AIBoard[i][j] = board[i][j].getValue();
-    //             }
-    //         }
-    //         const moveRow = move[0];
-    //         const moveCol = move[1];
-    //         // playerSpot.addPlayerMark(player.token);
-    //         AIBoard[moveRow][moveCol].addPlayerMark(player.token)
-    //         // newBoard[moveRow][moveCol] = player.token;
-
-    //         const result = minimax(AIBoard, player === aiPlayer ? humanPlayer : aiPlayer);
-    //         moves.push({
-    //             index: move,
-    //             score: result.score
-    //         });
-    //     }
-        
-    //     return player === aiPlayer ? getBestMove(moves) : getWorstMove(moves);
-    // }
-
-    // // Helper function to get the best move
-    // function getBestMove(moves) {
-    //     return moves.reduce((bestMove, move) => (move.score > bestMove.score ? move : bestMove), moves[0]);
-    // }
-    
-    // // Helper function to get the worst move
-    // function getWorstMove(moves) {
-    //     return moves.reduce((worstMove, move) => (move.score < worstMove.score ? move : worstMove), moves[0]);
-    // }
 
     const playRound = (row, col) => {
         const currentPlayer = getActivePlayer();
@@ -531,9 +482,7 @@ const ScreenController = (() => {
     const introModal = document.querySelector('.intro-box');
     const modal = document.querySelector('.modal-box');
     let playerTypes = document.querySelectorAll('.player-type');
-    // let playerOnebtns = document.querySelectorAll('.player-type > .player-One');
     let playerTwobtns = document.querySelectorAll('.player-type > .player-Two');
-    // playerOnebtns = Array.from(playerOnebtns);
     playerTwobtns = Array.from(playerTwobtns);
 
     playerTypes = Array.from(playerTypes);
@@ -647,19 +596,6 @@ const ScreenController = (() => {
 
 
     const checkDOMPlayerType = () => {
-        // looks for the active class on playerOne btns and assigns player type
-
-        // playerOnebtns.forEach(p1Btn => {
-        //     if (p1Btn.classList.contains('active')) {
-        //         if (p1Btn.classList.contains('player-selected')) {
-        //             game.playerOne.updatePlayerType('Human');
-        //         } else if (p1Btn.classList.contains('ai-selected')) {
-        //             game.playerOne.updatePlayerType('AI');
-        //         }
-        //     } else {
-        //         return false;
-        //     }
-        // })
 
         playerTwobtns.forEach(p2Btn => {
             if (p2Btn.classList.contains('active')) {
