@@ -234,16 +234,10 @@ const GameController = () => {
         // for rows
         for (let i = 0; i < 3; i++) {
             if (
-                board[i][0].getValue() === playerMarker &&
-                board[i][1].getValue() === playerMarker &&
-                board[i][2].getValue() === playerMarker
+                board[i][0] === playerMarker &&
+                board[i][1] === playerMarker &&
+                board[i][2] === playerMarker
                 ) {
-                roundWinner = player.getPlayerName();
-                player.playerScoreIncrement();
-                winPattern.push([i,0]);
-                winPattern.push([i,1]);
-                winPattern.push([i,2]);
-                console.log(winPattern);
                 return true;
             }
         }
@@ -251,9 +245,9 @@ const GameController = () => {
         // for columns
         for (let i = 0; i < 3; i++) {
             if (
-                board[0][i].getValue() === playerMarker &&
-                board[1][i].getValue() === playerMarker &&
-                board[2][i].getValue() === playerMarker
+                board[0][i] === playerMarker &&
+                board[1][i] === playerMarker &&
+                board[2][i] === playerMarker
                 ) {
                 return true;
             }
@@ -262,9 +256,9 @@ const GameController = () => {
         // for diagonals
         for(let i = 0; i < 3; i++) {
             if (
-                board[0][0].getValue() === playerMarker &&
-                board[1][1].getValue() === playerMarker &&
-                board[2][2].getValue() === playerMarker
+                board[0][0] === playerMarker &&
+                board[1][1] === playerMarker &&
+                board[2][2] === playerMarker
                 ) {
                 return true;
             }
@@ -272,9 +266,9 @@ const GameController = () => {
         // diagnonal 2
         for(let i = 0; i < 3; i++) {
             if (
-                board[0][2].getValue() === playerMarker &&
-                board[1][1].getValue() === playerMarker &&
-                board[2][0].getValue() === playerMarker
+                board[0][2] === playerMarker &&
+                board[1][1] === playerMarker &&
+                board[2][0] === playerMarker
                 ) {
                 return true;
             }
@@ -327,61 +321,159 @@ const GameController = () => {
                 console.log('someone-won. dont play');
                 return false;
             } else if (availableCells.length >= 1) {
-                const board2 = board1.getBoard();
-                const bestMove = minimax(board2, currentPlayer).index;
-                // console.log(bestMove);
+                const boardNew = getAIBoard(board1.getBoard());
+                const aiMove = bestMove(boardNew);
                 // const firstItem = availableCells[0];
-                // playRound(firstItem[0], firstItem[1]);
+                playRound(aiMove.row, aiMove.col);
                 return true;
             }
         }
     }
 
-    const minimax = (board, player) => {
+    const getAIBoard = (board) => {
+        const AIBoard = [];
+        for (let i = 0; i < board.length; i++) {
+            AIBoard[i] = [];
+            for (let j = 0; j < board[i].length; j++) {
+                AIBoard[i][j] = board[i][j].getValue();
+            }
+        }
+        return AIBoard;
+    }
+
+    const getAIBoardCell = (boardName) => {
+        const cellsArray = [];
+
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                // empty cells
+                if (boardName === 0) {
+                    const index = [i, j];
+                    cellsArray.push(index);
+                } 
+            }
+        }
+        return cellsArray;
+    }
+
+    const minimax = (board, depth, isMaximizing) => {
+
         const humanPlayer = playerOne;
         const aiPlayer = playerTwo;
+        
+        const availableCells = getAIBoardCell(board);
 
-        const availableCells = getEmptyCell();
+        
 
         if (AIcheckWin(board, humanPlayer)) {
-            return {score: -1};
+            return 1;
         } else if (AIcheckWin(board, aiPlayer)) {
-            return {score: 1};
+            return -1;
         } else if (availableCells.length === 0) {
-            return {score: 0};
+            return 0;
         }
 
-        const moves = [];
-
-        for (const move of availableCells) {
-            const newBoard = [...board1.getBoard()];
-            // const newBoard = JSON.parse(JSON.stringify(board));
-            const moveRow = move[0];
-            const moveCol = move[1];
-            const playerSpot = newBoard[moveRow][moveCol];
-            console.log(playerSpot);
-            playerSpot.addPlayerMark(player.token);
-            // playerSpot.getValue() = player.token;
-
-            const result = minimax(newBoard, player === aiPlayer ? humanPlayer : aiPlayer);
-            moves.push({
-                index: move,
-                score: result.score
-            });
-        }
-        
-        return player === aiPlayer ? getBestMove(moves) : getWorstMove(moves);
+        if (isMaximizing) {
+            let bestScore = -Infinity;
+            for (let i = 0; i < 3; i++) {
+              for (let j = 0; j < 3; j++) {
+                if (board[i][j] === 0) {
+                  board[i][j] = aiPlayer.token;
+                  let score = minimax(board, depth + 1, false);
+                  board[i][j] = 0;
+                  bestScore = Math.max(score, bestScore);
+                }
+              }
+            }
+            return bestScore;
+          } else {
+            let bestScore = Infinity;
+            for (let i = 0; i < 3; i++) {
+              for (let j = 0; j < 3; j++) {
+                if (board[i][j] === 0) {
+                  board[i][j] = humanPlayer.token;
+                  let score = minimax(board, depth + 1, true);
+                  board[i][j] = 0;
+                  bestScore = Math.min(score, bestScore);
+                }
+              }
+            }
+            return bestScore;
+          }
     }
 
-    // Helper function to get the best move
-    function getBestMove(moves) {
-        return moves.reduce((bestMove, move) => (move.score > bestMove.score ? move : bestMove), moves[0]);
-    }
+    // Function to find the best move for the AI player using Minimax
+    function bestMove(board) {
+        let bestScore = -Infinity;
+        let move = { row: -1, col: -1 };
     
-    // Helper function to get the worst move
-    function getWorstMove(moves) {
-        return moves.reduce((worstMove, move) => (move.score < worstMove.score ? move : worstMove), moves[0]);
+        for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+            if (board[i][j] === 0) {
+              board[i][j] = playerTwo.token;
+              let score = minimax(board, 0, false);
+              board[i][j] = 0;
+              if (score > bestScore) {
+                bestScore = score;
+                move.row = i;
+                move.col = j;
+              }
+            }
+          }
+        }
+    
+        return move;
     }
+
+    // const minimax = (board, player) => {
+    //     const humanPlayer = playerOne;
+    //     const aiPlayer = playerTwo;
+
+    //     const availableCells = getEmptyCell();
+
+    //     if (AIcheckWin(board, humanPlayer)) {
+    //         return {score: -1};
+    //     } else if (AIcheckWin(board, aiPlayer)) {
+    //         return {score: 1};
+    //     } else if (availableCells.length === 0) {
+    //         return {score: 0};
+    //     }
+
+    //     const moves = [];
+
+    //     for (const move of availableCells) {
+    //         const AIBoard = [];
+    //         for (let i = 0; i < board.length; i++) {
+    //             AIBoard[i] = [];
+    //             for (let j = 0; j < board[i].length; j++) {
+    //                 AIBoard[i][j] = board[i][j].getValue();
+    //             }
+    //         }
+    //         const moveRow = move[0];
+    //         const moveCol = move[1];
+    //         // playerSpot.addPlayerMark(player.token);
+    //         AIBoard[moveRow][moveCol].addPlayerMark(player.token)
+    //         // newBoard[moveRow][moveCol] = player.token;
+
+    //         const result = minimax(AIBoard, player === aiPlayer ? humanPlayer : aiPlayer);
+    //         moves.push({
+    //             index: move,
+    //             score: result.score
+    //         });
+    //     }
+        
+    //     return player === aiPlayer ? getBestMove(moves) : getWorstMove(moves);
+    // }
+
+    // // Helper function to get the best move
+    // function getBestMove(moves) {
+    //     return moves.reduce((bestMove, move) => (move.score > bestMove.score ? move : bestMove), moves[0]);
+    // }
+    
+    // // Helper function to get the worst move
+    // function getWorstMove(moves) {
+    //     return moves.reduce((worstMove, move) => (move.score < worstMove.score ? move : worstMove), moves[0]);
+    // }
 
     const playRound = (row, col) => {
         const currentPlayer = getActivePlayer();
@@ -648,7 +740,6 @@ const ScreenController = (() => {
             }
         });
     })
-
 
 
 })();
