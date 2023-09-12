@@ -1,5 +1,4 @@
 // winning logic
-
 const gameBoard = () => {
     const row = 3;
     const column = 3;
@@ -229,6 +228,55 @@ const GameController = () => {
         return false;
     }
 
+    const AIcheckWin = (board, player) => {
+        const playerMarker = player.token;
+        // for rows
+        for (let i = 0; i < 3; i++) {
+            if (
+                board[i][0] === playerMarker &&
+                board[i][1] === playerMarker &&
+                board[i][2] === playerMarker
+                ) {
+                return true;
+            }
+        }
+
+        // for columns
+        for (let i = 0; i < 3; i++) {
+            if (
+                board[0][i] === playerMarker &&
+                board[1][i] === playerMarker &&
+                board[2][i] === playerMarker
+                ) {
+                return true;
+            }
+        }
+
+        // for diagonals
+        for(let i = 0; i < 3; i++) {
+            if (
+                board[0][0] === playerMarker &&
+                board[1][1] === playerMarker &&
+                board[2][2] === playerMarker
+                ) {
+                return true;
+            }
+        }
+        // diagnonal 2
+        for(let i = 0; i < 3; i++) {
+            if (
+                board[0][2] === playerMarker &&
+                board[1][1] === playerMarker &&
+                board[2][0] === playerMarker
+                ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
     const checkForDraw = () => {
         const newBoard = board1.getBoard();
         for (let i = 0; i < 3; i++) {
@@ -272,12 +320,109 @@ const GameController = () => {
                 console.log('someone-won. dont play');
                 return false;
             } else if (availableCells.length >= 1) {
-                const firstItem = availableCells[0];
-                playRound(firstItem[0], firstItem[1]);
+                const boardNew = getAIBoard(board1.getBoard());
+                const aiMove = bestMove(boardNew);
+                playRound(aiMove.row, aiMove.col);
                 return true;
             }
         }
     }
+
+    const getAIBoard = (board) => {
+        const AIBoard = [];
+        for (let i = 0; i < board.length; i++) {
+            AIBoard[i] = [];
+            for (let j = 0; j < board[i].length; j++) {
+                AIBoard[i][j] = board[i][j].getValue();
+            }
+        }
+        return AIBoard;
+    }
+
+    const getAIBoardCell = (boardName) => {
+        const cellsArray = [];
+
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                // empty cells
+                if (boardName[i][j] === 0) {
+                    const index = [i, j];
+                    cellsArray.push(index);
+                } 
+            }
+        }
+        return cellsArray;
+    }
+
+    const minimax = (board, depth, isMaximizing) => {
+
+        const humanPlayer = playerOne;
+        const aiPlayer = playerTwo;
+        
+        const availableCells = getAIBoardCell(board);
+
+        
+
+        if (AIcheckWin(board, humanPlayer)) {
+            return -1;
+        } else if (AIcheckWin(board, aiPlayer)) {
+            return 1;
+        } else if (availableCells.length === 0) {
+            return 0; 
+        }
+
+        if (isMaximizing) {
+            let bestScore = -Infinity;
+            for (let i = 0; i < 3; i++) {
+              for (let j = 0; j < 3; j++) {
+                if (board[i][j] === 0) {
+                  board[i][j] = aiPlayer.token;
+                  let score = minimax(board, depth + 1, false);
+                  board[i][j] = 0;
+                  bestScore = Math.max(score, bestScore);
+                }
+              }
+            }
+            return bestScore;
+          } else {
+            let bestScore = Infinity;
+            for (let i = 0; i < 3; i++) {
+              for (let j = 0; j < 3; j++) {
+                if (board[i][j] === 0) {
+                  board[i][j] = humanPlayer.token;
+                  let score = minimax(board, depth + 1, true);
+                  board[i][j] = 0; 
+                  bestScore = Math.min(score, bestScore);
+                }
+              }
+            }
+            return bestScore;
+          }
+    }
+
+    // Function to find the best move for the AI player using Minimax
+    function bestMove(board) {
+        let bestScore = -Infinity;
+        let move = { row: -1, col: -1 };
+
+        for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+            if (board[i][j] === 0) {
+              board[i][j] = playerTwo.token;
+              let score = minimax(board, 0, false);
+              board[i][j] = 0;
+              if (score > bestScore) {
+                bestScore = score;
+                move.row = i;
+                move.col = j;
+              }
+            }
+          }
+        }
+    
+        return move;
+    }
+
 
     const playRound = (row, col) => {
         const currentPlayer = getActivePlayer();
@@ -335,9 +480,7 @@ const ScreenController = (() => {
     const introModal = document.querySelector('.intro-box');
     const modal = document.querySelector('.modal-box');
     let playerTypes = document.querySelectorAll('.player-type');
-    let playerOnebtns = document.querySelectorAll('.player-type > .player-One');
     let playerTwobtns = document.querySelectorAll('.player-type > .player-Two');
-    playerOnebtns = Array.from(playerOnebtns);
     playerTwobtns = Array.from(playerTwobtns);
 
     playerTypes = Array.from(playerTypes);
@@ -451,18 +594,6 @@ const ScreenController = (() => {
 
 
     const checkDOMPlayerType = () => {
-        // looks for the active class on playerOne btns and assigns player type
-        playerOnebtns.forEach(p1Btn => {
-            if (p1Btn.classList.contains('active')) {
-                if (p1Btn.classList.contains('player-selected')) {
-                    game.playerOne.updatePlayerType('Human');
-                } else if (p1Btn.classList.contains('ai-selected')) {
-                    game.playerOne.updatePlayerType('AI');
-                }
-            } else {
-                return false;
-            }
-        })
 
         playerTwobtns.forEach(p2Btn => {
             if (p2Btn.classList.contains('active')) {
@@ -544,7 +675,6 @@ const ScreenController = (() => {
             }
         });
     })
-
 
 
 })();
