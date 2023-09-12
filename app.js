@@ -324,6 +324,7 @@ const GameController = () => {
                 const boardNew = getAIBoard(board1.getBoard());
                 const aiMove = bestMove(boardNew);
                 // const firstItem = availableCells[0];
+                // playRound(firstItem[0], firstItem[1]);
                 playRound(aiMove.row, aiMove.col);
                 return true;
             }
