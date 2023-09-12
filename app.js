@@ -531,9 +531,9 @@ const ScreenController = (() => {
     const introModal = document.querySelector('.intro-box');
     const modal = document.querySelector('.modal-box');
     let playerTypes = document.querySelectorAll('.player-type');
-    let playerOnebtns = document.querySelectorAll('.player-type > .player-One');
+    // let playerOnebtns = document.querySelectorAll('.player-type > .player-One');
     let playerTwobtns = document.querySelectorAll('.player-type > .player-Two');
-    playerOnebtns = Array.from(playerOnebtns);
+    // playerOnebtns = Array.from(playerOnebtns);
     playerTwobtns = Array.from(playerTwobtns);
 
     playerTypes = Array.from(playerTypes);
@@ -648,17 +648,18 @@ const ScreenController = (() => {
 
     const checkDOMPlayerType = () => {
         // looks for the active class on playerOne btns and assigns player type
-        playerOnebtns.forEach(p1Btn => {
-            if (p1Btn.classList.contains('active')) {
-                if (p1Btn.classList.contains('player-selected')) {
-                    game.playerOne.updatePlayerType('Human');
-                } else if (p1Btn.classList.contains('ai-selected')) {
-                    game.playerOne.updatePlayerType('AI');
-                }
-            } else {
-                return false;
-            }
-        })
+
+        // playerOnebtns.forEach(p1Btn => {
+        //     if (p1Btn.classList.contains('active')) {
+        //         if (p1Btn.classList.contains('player-selected')) {
+        //             game.playerOne.updatePlayerType('Human');
+        //         } else if (p1Btn.classList.contains('ai-selected')) {
+        //             game.playerOne.updatePlayerType('AI');
+        //         }
+        //     } else {
+        //         return false;
+        //     }
+        // })
 
         playerTwobtns.forEach(p2Btn => {
             if (p2Btn.classList.contains('active')) {
