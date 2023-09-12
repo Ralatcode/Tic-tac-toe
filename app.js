@@ -347,7 +347,7 @@ const GameController = () => {
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
                 // empty cells
-                if (boardName === 0) {
+                if (boardName[i][j] === 0) {
                     const index = [i, j];
                     cellsArray.push(index);
                 } 
@@ -366,11 +366,11 @@ const GameController = () => {
         
 
         if (AIcheckWin(board, humanPlayer)) {
-            return 1;
-        } else if (AIcheckWin(board, aiPlayer)) {
             return -1;
+        } else if (AIcheckWin(board, aiPlayer)) {
+            return 1;
         } else if (availableCells.length === 0) {
-            return 0;
+            return 0; 
         }
 
         if (isMaximizing) {
@@ -393,7 +393,7 @@ const GameController = () => {
                 if (board[i][j] === 0) {
                   board[i][j] = humanPlayer.token;
                   let score = minimax(board, depth + 1, true);
-                  board[i][j] = 0;
+                  board[i][j] = 0; 
                   bestScore = Math.min(score, bestScore);
                 }
               }
@@ -406,7 +406,7 @@ const GameController = () => {
     function bestMove(board) {
         let bestScore = -Infinity;
         let move = { row: -1, col: -1 };
-    
+
         for (let i = 0; i < 3; i++) {
           for (let j = 0; j < 3; j++) {
             if (board[i][j] === 0) {
