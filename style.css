@@ -347,9 +347,14 @@ body {
         padding: 2.0rem 1.5rem;
     }
 
+    .intro-content button, .save-btn, .restart-game, .continue-game {
+        font-size: 1rem;
+    }
+
     .modal-box > .text-box {
         padding: 1.75rem;
         margin: 50% auto 0;
+        width: 80%;
     }
 
     .intro-content > .inner-div {
@@ -366,7 +371,12 @@ body {
     }
 
     .modal-text {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
+    }
+
+    .update-name-modal > form {
+        width: 85%;
+        max-width: none;
     }
 
     .score-box {
@@ -377,5 +387,19 @@ body {
 
     .player {
         padding: 1rem;
+    }
+
+    .player > h3 {
+        font-size: 1.25rem;
+    }
+
+    .game-winner-box > .content {
+        width: 90%;
+        max-width: none;
+        padding: 1.5rem 1rem;
+    }
+
+    .winner-h3 {
+        font-size: 1.25rem;
     }
 }
