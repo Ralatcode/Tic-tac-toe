@@ -341,12 +341,37 @@ body {
         margin: 1.5rem auto 0;
     }
 
+    .intro-content {
+        width: 90%;
+        max-width: none;
+        padding: 2.0rem 1.5rem;
+    }
+
     .modal-box > .text-box {
         padding: 1.75rem;
         margin: 50% auto 0;
     }
 
+    .intro-content > .inner-div {
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .intro-content > .inner-div > div {
+        width: 100%;
+    }
+
     .modal-text {
         font-size: 1.25rem;
+    }
+
+    .score-box {
+        width: 90%;
+        max-width: none;
+        padding: .5rem;
+    }
+
+    .player {
+        padding: 1rem;
     }
 }
