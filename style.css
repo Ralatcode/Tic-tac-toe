@@ -357,6 +357,10 @@ body {
         gap: 1.25rem;
     }
 
+    .intro-content > .inner-div.switch {
+        flex-direction: column-reverse;
+    }
+
     .intro-content > .inner-div > div {
         width: 100%;
     }
