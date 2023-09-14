@@ -568,7 +568,6 @@ const ScreenController = (() => {
         const winnerModal = document.querySelector('.game-winner-box');
         const winnerModalH3 = document.querySelector('.winner-h3');
         const restartBtn = document.querySelector('.restart-game');
-        console.log(`player one is ${playerOne.getPlayerScore()} and playertwo is ${playerTwo.getPlayerScore()}`)
         if (playerOne.getPlayerScore() === 3 || playerTwo.getPlayerScore() === 3) {
             winnerModal.classList.add('open');
             // checks player with highest score after one player has 3 wins
