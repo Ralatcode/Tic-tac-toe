@@ -310,14 +310,11 @@ const GameController = () => {
     const AIPlayer = () => {
         const currentPlayer = getActivePlayer();
         if (currentPlayer.getPlayerType() === 'AI') {
-            console.log('player is ai..');
             const availableCells = getEmptyCell();
             if (availableCells === []) {
-                console.log('no space');
                 return false;
                 // checks if there is a winner already
             } else if (getWinStatus()){ 
-                console.log('someone-won. dont play');
                 return false;
             } else if (availableCells.length >= 1) {
                 const boardNew = getAIBoard(board1.getBoard());
@@ -538,9 +535,7 @@ const ScreenController = (() => {
         const win = game.getWinStatus();
         const draw = game.getDrawStatus();
         const winnerName = game.getRoundWinner();
-        console.log(`win is ${win} draw is ${draw}, winner result is ${winnerName}`)
         if (win) {
-            console.log('display-result ran');
             resultDisplay.textContent = `${winnerName} Won !!`;
             modal.classList.add('open');
 
