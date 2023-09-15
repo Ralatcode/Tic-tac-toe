@@ -534,7 +534,7 @@ const ScreenController = (() => {
     const highlightWinningPattern = (pattern) => {
         const cells = Array.from(document.querySelectorAll('.cell'));
         for (const position of pattern) {
-            console.log(position)
+            // console.log(position)
             const row = position[0];
             const col = position[1];
 
