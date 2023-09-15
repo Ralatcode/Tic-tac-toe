@@ -345,6 +345,7 @@ body {
         width: 90%;
         max-width: none;
         padding: 2.0rem 1.5rem;
+        margin: 2.5rem auto .5rem;
     }
 
     .intro-content button, .save-btn, .restart-game, .continue-game {
