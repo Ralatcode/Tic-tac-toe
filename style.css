@@ -101,7 +101,7 @@ body {
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     opacity: 1;
     transition: opacity .5s ease-out;
 }
@@ -205,7 +205,7 @@ body {
     top: 0;
     left: -100%;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     transition: left 1s, opacity .5s;
@@ -239,7 +239,7 @@ body {
     top: 0;
     left: -100%;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 99;
     opacity: 0;
@@ -307,7 +307,7 @@ body {
     left: -100%;
     background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     opacity: 0;
     transition: left 1s, opacity .5s;
 }
@@ -345,7 +345,7 @@ body {
         width: 90%;
         max-width: none;
         padding: 2.0rem 1.5rem;
-        margin: 2.5rem auto .5rem;
+        margin: 2.5rem auto 1rem;
     }
 
     .intro-content button, .save-btn, .restart-game, .continue-game {
@@ -384,6 +384,13 @@ body {
         width: 90%;
         max-width: none;
         padding: .5rem;
+    }
+
+    .player-type {
+        display: flex;
+        gap: 3px;
+        align-items: center;
+        justify-content: center;
     }
 
     .player {
