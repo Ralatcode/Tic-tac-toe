@@ -170,7 +170,6 @@ const GameController = () => {
                 winPattern.push([i,0]);
                 winPattern.push([i,1]);
                 winPattern.push([i,2]);
-                console.log(winPattern);
                 return true;
             }
         }
@@ -185,7 +184,6 @@ const GameController = () => {
                 winPattern.push([0,i]);
                 winPattern.push([1,i]);
                 winPattern.push([2,i]);
-                console.log(winPattern);
                 roundWinner = player.getPlayerName();
                 player.playerScoreIncrement();
                 return true;
@@ -202,7 +200,6 @@ const GameController = () => {
                 winPattern.push([0,0]);
                 winPattern.push([1,1]);
                 winPattern.push([2,2]);
-                console.log(winPattern);
                 roundWinner = player.getPlayerName();
                 player.playerScoreIncrement();
                 return true;
@@ -218,7 +215,6 @@ const GameController = () => {
                 winPattern.push([0,2]);
                 winPattern.push([1,1]);
                 winPattern.push([2,0]);
-                console.log(winPattern);
                 roundWinner = player.getPlayerName();
                 player.playerScoreIncrement();
                 return true;
