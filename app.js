@@ -531,6 +531,22 @@ const ScreenController = (() => {
         }
     }
 
+    const highlightWinningPattern = (pattern) => {
+        const cells = Array.from(document.querySelectorAll('.cell'));
+        for (const position of pattern) {
+            console.log(position)
+            const row = position[0];
+            const col = position[1];
+
+            cells.forEach((cell) => {
+                if (cell.dataset.row == row && cell.dataset.col == col) {
+                    console.log('hightlight')
+                    cell.classList.add('winning');
+                }
+            })
+        }
+    }
+
     const displayResult = () => {
         const win = game.getWinStatus();
         const draw = game.getDrawStatus();
@@ -538,7 +554,7 @@ const ScreenController = (() => {
         if (win) {
             resultDisplay.textContent = `${winnerName} Won !!`;
             modal.classList.add('open');
-
+            highlightWinningPattern(game.getWinPattern());
         } else if (draw) {
             resultDisplay.textContent = "It's a tie..."
             modal.classList.add('open');
@@ -652,14 +668,7 @@ const ScreenController = (() => {
     playerTypes.forEach(playerType => {
         playerType.addEventListener('click', (e) => {
             const parentNode = e.target.parentNode;
-            if (parentNode.classList.contains('p1')) {
-                playerOnebtns.forEach(p1Btn => {
-                    p1Btn.classList.remove('active');
-                    if (e.target === p1Btn) {
-                        p1Btn.classList.add('active');
-                    }
-                })
-            } else if (parentNode.classList.contains('p2')) {
+            if (parentNode.classList.contains('p2')) {
                 playerTwobtns.forEach(p2Btn => {
                     p2Btn.classList.remove('active');
                     if (e.target === p2Btn) {
