@@ -534,13 +534,11 @@ const ScreenController = (() => {
     const highlightWinningPattern = (pattern) => {
         const cells = Array.from(document.querySelectorAll('.cell'));
         for (const position of pattern) {
-            // console.log(position)
             const row = position[0];
             const col = position[1];
 
             cells.forEach((cell) => {
-                if (cell.dataset.row == row && cell.dataset.col == col) {
-                    console.log('hightlight')
+                if (cell.dataset.row == row && cell.dataset.column == col) {
                     cell.classList.add('winning');
                 }
             })
