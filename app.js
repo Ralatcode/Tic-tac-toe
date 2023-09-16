@@ -605,13 +605,6 @@ const ScreenController = (() => {
     }
 
 
-    // const DOMRestartGame = () => {
-    //     game.restartGame();
-    //     interfaceDiv.classList.remove('show');
-    //     winnerModal.classList.remove('open');
-    //     introModal.classList.remove('hide', 'display-none');
-    // }
-
 
     const checkDOMPlayerType = () => {
 
