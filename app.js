@@ -1,4 +1,4 @@
-// winning logic
+// gameboard factory function
 const gameBoard = () => {
     const row = 3;
     const column = 3;
@@ -124,7 +124,7 @@ const GameController = () => {
     const printNewRound = () => {
         board1.printBoard();
     }
-
+    // default values
     let winResult = false;
     let drawResult = false;
 
@@ -156,6 +156,7 @@ const GameController = () => {
         playerTwo.playerScoreReset();
     }
 
+    // game winning logic
     const checkForWin = (board, player) => {
         const playerMarker = player.token;
         // for rows
@@ -165,8 +166,8 @@ const GameController = () => {
                 board[i][1].getValue() === playerMarker &&
                 board[i][2].getValue() === playerMarker
                 ) {
-                roundWinner = player.getPlayerName();
-                player.playerScoreIncrement();
+                roundWinner = player.getPlayerName(); // assign the player name to roundwinner
+                player.playerScoreIncrement(); // increments the player score
                 winPattern.push([i,0]);
                 winPattern.push([i,1]);
                 winPattern.push([i,2]);
@@ -200,8 +201,8 @@ const GameController = () => {
                 winPattern.push([0,0]);
                 winPattern.push([1,1]);
                 winPattern.push([2,2]);
-                roundWinner = player.getPlayerName();
-                player.playerScoreIncrement();
+                roundWinner = player.getPlayerName(); // assign the player name to roundwinner
+                player.playerScoreIncrement(); // increments the player score
                 return true;
             }
         }
@@ -224,6 +225,7 @@ const GameController = () => {
         return false;
     }
 
+    // win logic used for minimax function
     const AIcheckWin = (board, player) => {
         const playerMarker = player.token;
         // for rows
@@ -321,6 +323,7 @@ const GameController = () => {
         }
     }
 
+    // converts the default board with diff function to a plain board for minimax
     const getAIBoard = (board) => {
         const AIBoard = [];
         for (let i = 0; i < board.length; i++) {
@@ -332,6 +335,7 @@ const GameController = () => {
         return AIBoard;
     }
 
+    //  get ai board empty cells
     const getAIBoardCell = (boardName) => {
         const cellsArray = [];
 
@@ -416,7 +420,7 @@ const GameController = () => {
         return move;
     }
 
-
+    // round logic
     const playRound = (row, col) => {
         const currentPlayer = getActivePlayer();
         const boardInput = board1.markPlayerInput(currentPlayer, row, col);
@@ -458,7 +462,7 @@ const GameController = () => {
         restartRound
     };
 }
-
+// module for screen controller
 const ScreenController = (() => {
     const game = GameController();
     const interfaceDiv = document.querySelector('.interface-div');
@@ -478,6 +482,7 @@ const ScreenController = (() => {
 
     playerTypes = Array.from(playerTypes);
 
+    // update the game on DOM
     const updateScreen = () => {
         container.textContent = '';
         resultDisplay.textContent = '';
@@ -496,7 +501,7 @@ const ScreenController = (() => {
 
         const playerOneDiv = document.querySelector('.p1-scorebox');
         const playerTwoDiv = document.querySelector('.p2-scorebox');
-
+        // add border bottom for active player turn
         if (activePlayer.token === 'X') {
             playerTwoDiv.classList.remove('active');
             playerOneDiv.classList.add('active');
@@ -504,7 +509,7 @@ const ScreenController = (() => {
             playerOneDiv.classList.remove('active');
             playerTwoDiv.classList.add('active');
         }
-
+        // render board on the DOM
         board.forEach((row, rowIndex) => {
             row.forEach((cell, colIndex) => {
                 const cellButton = document.createElement('button');
@@ -521,20 +526,19 @@ const ScreenController = (() => {
                 }
             })
         })
-
+        // restart round and game when restart btn is clicked
         document.querySelector('.restart').addEventListener('click', () => {
             game.restartRound();
             game.restartGame();
             interfaceDiv.classList.remove('show');
-            // winnerModal.classList.remove('open');
             introModal.classList.remove('hide', 'display-none');
         });
-
+        // shows result on win or draw
         if (win || draw) {
             displayResult();
         }
     }
-
+    // winning pattern for DOM
     const highlightWinningPattern = (pattern) => {
         const cells = Array.from(document.querySelectorAll('.cell'));
         for (const position of pattern) {
@@ -572,8 +576,9 @@ const ScreenController = (() => {
     }
 
     const continueBtn = document.querySelector('.continue-game');
-        continueBtn.addEventListener('click', removeModal);
-
+    continueBtn.addEventListener('click', removeModal);
+    
+    // close modal on outside modal click
     window.addEventListener('click', (e) => {
         if (e.target == modal) {
             removeModal();
@@ -607,7 +612,7 @@ const ScreenController = (() => {
 
 
     const checkDOMPlayerType = () => {
-
+        // updates player type from DOM on game start
         playerTwobtns.forEach(p2Btn => {
             if (p2Btn.classList.contains('active')) {
                 if (p2Btn.classList.contains('player-selected')) {
@@ -637,8 +642,10 @@ const ScreenController = (() => {
         updateScreen();
     })
 
+    // add display none at the end of transition
     introModal.addEventListener('transitionend', () => introModal.classList.add('display-none'));
 
+    // update player name form submit
     nameForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const player = game.playerOne;
@@ -648,6 +655,7 @@ const ScreenController = (() => {
         updateNameModal.classList.remove('show');
     })
 
+    // handles clicks on the game board
     container.addEventListener('click', (e) => {
         const clickedCellRow = e.target.dataset.row;
         const clickedCellCol = e.target.dataset.column;
