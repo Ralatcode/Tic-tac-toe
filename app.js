@@ -522,6 +522,14 @@ const ScreenController = (() => {
             })
         })
 
+        document.querySelector('.restart').addEventListener('click', () => {
+            game.restartRound();
+            game.restartGame();
+            interfaceDiv.classList.remove('show');
+            // winnerModal.classList.remove('open');
+            introModal.classList.remove('hide', 'display-none');
+        });
+
         if (win || draw) {
             displayResult();
         }
@@ -593,8 +601,16 @@ const ScreenController = (() => {
             interfaceDiv.classList.remove('show');
             winnerModal.classList.remove('open');
             introModal.classList.remove('hide', 'display-none');
-        })
+        });
     }
+
+
+    // const DOMRestartGame = () => {
+    //     game.restartGame();
+    //     interfaceDiv.classList.remove('show');
+    //     winnerModal.classList.remove('open');
+    //     introModal.classList.remove('hide', 'display-none');
+    // }
 
 
     const checkDOMPlayerType = () => {
