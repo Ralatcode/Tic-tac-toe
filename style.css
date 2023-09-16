@@ -15,6 +15,8 @@ body {
 }
 .interface-div {
     display: none;
+    margin-top: 1rem;
+    text-align: center;
 }
 
 .interface-div.show {
@@ -139,7 +141,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.intro-content button, .save-btn, .restart-game, .continue-game {
+.intro-content button, .save-btn, .restart-game, .continue-game, .restart {
     font-family: inherit;
     font-size: .9rem;
     outline: none;
